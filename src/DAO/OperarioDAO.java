@@ -138,15 +138,6 @@ public class OperarioDAO {
         return o;   
     }
     
-//    public String idIncrementable(){
-//        EntityManager em = ojc.getEntityManager();
-//        Query query = em.createNativeQuery("SELECT Max(o.id)+1 FROM Operarios o");
-//        List id = query.getResultList();
-//        String idIncrement = id.toString();
-//        return idIncrement.replace("[", "").replace("]", "");
-//        
-//    }
-    
     public boolean loginOperario (String usuario, String contrasena){
         EntityManager em = ojc.getEntityManager();
         boolean valor;

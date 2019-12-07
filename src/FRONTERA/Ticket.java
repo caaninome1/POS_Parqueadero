@@ -147,7 +147,7 @@ public class Ticket extends javax.swing.JFrame implements Printable {
 
         jPanel1.add(ticket, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 220));
 
-        btnGenerarTicket.setText("Generar Ticket");
+        btnGenerarTicket.setText("Imprimir Ticket");
         btnGenerarTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGenerarTicketActionPerformed(evt);

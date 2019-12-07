@@ -21,7 +21,6 @@ public class Operario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("OPERARIO");
         mostrarTabla();
-        //Factura abrir = new Factura();
         
     }
 
@@ -58,12 +57,11 @@ public class Operario extends javax.swing.JFrame {
         txtIVA = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTiempo = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbformaPago = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(null);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -253,9 +251,9 @@ public class Operario extends javax.swing.JFrame {
         txtTiempo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel1.add(txtTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 180, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Efectivo", "T. Crédito", "T. Débito", "Puntos" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 140, 30));
+        cbformaPago.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cbformaPago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Efectivo", "T. Crédito", "T. Débito", "Puntos" }));
+        jPanel1.add(cbformaPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 140, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 580, 10));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 580, 10));
 
@@ -296,16 +294,7 @@ public class Operario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "¡El id no existe!");
             limpiar();          
         }else{
-        //Clientes c = cdao.buscarClientes(new BigInteger(txtIdTicket.getText()));
         BigInteger IdTicket = new BigInteger(txtIdTicket.getText());
-//        String matricula = txtMatricula.getText();
-//        String tipoVehiculo = cbTipoVehiculo.getSelectedItem().toString();
-//        int puntos = Integer.parseInt(txtPuntos.getText());
-//        String entrada = txtFechaEntrada.getText();
-//        
-//        Double baseImponible = Double.parseDouble(txtBaseImponible.getText());
-//        Double iva = Double.parseDouble(txtIVA.getText());
-//        Double valorTotal = Double.parseDouble(txtValorTotal.getText());
         mensaje = cdao.salidaCliente(IdTicket); 
         
         JOptionPane.showMessageDialog(null, mensaje);
@@ -434,7 +423,7 @@ public class Operario extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalida;
     private javax.swing.JComboBox cbTipoVehiculo;
-    private javax.swing.JComboBox jComboBox1;
+    public static javax.swing.JComboBox cbformaPago;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
