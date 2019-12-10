@@ -1,6 +1,6 @@
 package FRONTERA;
 
-import DAO.ClienteDAO;
+import CONTROLADOR.ControlClientes;
 import ENTIDAD.Clientes;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -16,7 +16,7 @@ import javax.swing.UIManager;
  */
 public class Operario extends javax.swing.JFrame {
 
-    private ClienteDAO cdao = new ClienteDAO();
+    private ControlClientes cdao = new ControlClientes();
     
     private int x;
     private int y;
@@ -104,7 +104,7 @@ public class Operario extends javax.swing.JFrame {
         });
         jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 170, 30));
 
-        btnIngreso.setBackground(new java.awt.Color(0, 255, 0));
+        btnIngreso.setBackground(new java.awt.Color(153, 255, 0));
         btnIngreso.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         btnIngreso.setText("INGRESO");
         btnIngreso.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,7 +122,7 @@ public class Operario extends javax.swing.JFrame {
         });
         jPanel1.add(btnIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 170, 40));
 
-        btnSalida.setBackground(new java.awt.Color(255, 0, 0));
+        btnSalida.setBackground(new java.awt.Color(0, 204, 255));
         btnSalida.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         btnSalida.setText("SALIDA");
         btnSalida.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -575,11 +575,11 @@ public class Operario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarIdTicketMouseExited
 
     private void btnIngresoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseExited
-        btnIngreso.setBackground(new Color(0,255,0));
+        btnIngreso.setBackground(new Color(153,255,0));
     }//GEN-LAST:event_btnIngresoMouseExited
 
     private void btnSalidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseExited
-        btnSalida.setBackground(new Color(255,0,0));
+        btnSalida.setBackground(new Color(0,204,255));
     }//GEN-LAST:event_btnSalidaMouseExited
 
     private void btnIngresoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseEntered
@@ -587,7 +587,7 @@ public class Operario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresoMouseEntered
 
     private void btnSalidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseEntered
-        btnSalida.setBackground(new Color(255,51,51));
+        btnSalida.setBackground(new Color(153,255,255));
     }//GEN-LAST:event_btnSalidaMouseEntered
 
 

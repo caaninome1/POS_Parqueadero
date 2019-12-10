@@ -5,7 +5,7 @@
  */
 package FRONTERA;
 
-import DAO.ParqueaderoDAO;
+import CONTROLADOR.ControlParqueadero;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -22,7 +22,7 @@ public class ActualizarParqueadero extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    private ParqueaderoDAO pdao = new ParqueaderoDAO();
+    private ControlParqueadero pdao = new ControlParqueadero();
     
     public ActualizarParqueadero() {
         initComponents();

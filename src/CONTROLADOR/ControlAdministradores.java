@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package CONTROLADOR;
 
-import CONTROL.AdministradoresJpaController;
+import DAOS.DaoAdministradores;
 import ENTIDAD.Administradores;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
  *
  * @author Carlos
  */
-public class AdministradoresDAO {
+public class ControlAdministradores {
 
     private Administradores admin = new Administradores();
-    private AdministradoresJpaController ajc = new AdministradoresJpaController();
+    private DaoAdministradores ajc = new DaoAdministradores();
     private String mensaje = "";
 
     public boolean login(String administrador, String contraseña) {

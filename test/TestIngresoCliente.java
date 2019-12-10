@@ -1,4 +1,4 @@
-import DAO.ClienteDAO;
+import CONTROLADOR.ControlClientes;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
@@ -39,7 +39,7 @@ public class TestIngresoCliente {
     
     @Test
     public void ingresoCliente(){
-        ClienteDAO cdao = new ClienteDAO();
+        ControlClientes cdao = new ControlClientes();
 
         System.out.println(cdao.ingresoCliente("ABC123", "Automovil"));               
         System.out.println(cdao.ingresoCliente("AAA 000", "Automovil"));

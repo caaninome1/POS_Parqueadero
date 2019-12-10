@@ -1,5 +1,5 @@
 
-import DAO.ParqueaderoDAO;
+import CONTROLADOR.ControlParqueadero;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class InicializacionParquadero {
 
     @Test 
     public void insertarParqueadero(){
-       ParqueaderoDAO pdao = new ParqueaderoDAO();
+       ControlParqueadero pdao = new ControlParqueadero();
        System.out.println(pdao.insertarParqueadero("","", "", "", 
                 "", "", "", 0, 0, 0));
        System.out.println(pdao.insertarParqueadero("0123456789","Parking", "Comun", "Cl 123", 
@@ -115,7 +115,7 @@ public class InicializacionParquadero {
     
     @Test
     public void actualizarParqueadero(){
-        ParqueaderoDAO pdao = new ParqueaderoDAO();
+        ControlParqueadero pdao = new ControlParqueadero();
         System.out.println(pdao.actualizarParqueadero("","", "", "", 
                 "", "", "", 0, 0, 0));
         System.out.println(pdao.actualizarParqueadero("0123456789","Parking", "Comun", "Cl 123", 

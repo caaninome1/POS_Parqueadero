@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlOperarios;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class TestBuscarOperario {
 
     @Test
     public void buscarOperario(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         System.out.println(odao.buscarOperarioId(""));
         System.out.println(odao.buscarOperarioId("012345"));
         System.out.println(odao.buscarOperarioId("0"));

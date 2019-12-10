@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package CONTROLADOR;
 
-import CONTROL.ParqueaderoJpaController;
+import DAOS.DaoParqueadero;
 import ENTIDAD.Parqueadero;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,8 +16,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carlos
  */
-public class ParqueaderoDAO {
-    private ParqueaderoJpaController pjc = new ParqueaderoJpaController();
+public class ControlParqueadero {
+    private DaoParqueadero pjc = new DaoParqueadero();
     private Parqueadero parqueadero = new Parqueadero();
     private String mensaje = "";
     public String nitparqueadero;

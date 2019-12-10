@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import DAO.ClienteDAO;
+import CONTROLADOR.ControlClientes;
 import java.math.BigInteger;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,14 +40,25 @@ public class TestSalidaCliente {
 
     @Test
     public void salidaClientes(){
-        ClienteDAO cdao = new ClienteDAO();
+        ControlClientes cdao = new ControlClientes();
         
-//        System.out.println(cdao.salidaCliente(new BigInteger("2")));
-//        System.out.println(cdao.salidaCliente(new BigInteger("3")));
-//        System.out.println(cdao.salidaCliente(new BigInteger("3")));
-//        System.out.println(cdao.salidaCliente(new BigInteger("18")));
-//        System.out.println(cdao.salidaCliente(new BigInteger("0")));
-//        System.out.println(cdao.salidaCliente(new BigInteger("-1")));
-        System.out.println(cdao.salidaCliente(new BigInteger("12"),"Puntos"));
+        System.out.println(cdao.salidaCliente(new BigInteger("2"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("3"),"T. Crédito"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("3"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("4"),"Punt"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("4"),"Puntos"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("18"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("0"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("-1"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
+        System.out.println(cdao.salidaCliente(new BigInteger("4"),"Efectivo"));
+        System.out.println("--------------------------------------------------");
     }
 }

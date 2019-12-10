@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CONTROL;
+package DAOS;
 
 import CONTROL.exceptions.NonexistentEntityException;
 import CONTROL.exceptions.PreexistingEntityException;
-import ENTIDAD.Parqueadero;
+import ENTIDAD.Administradores;
 import java.io.Serializable;
-import java.security.AccessControlException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,9 +22,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Carlos
  */
-public class ParqueaderoJpaController implements Serializable {
+public class DaoAdministradores implements Serializable {
 
-    public ParqueaderoJpaController(EntityManagerFactory emf) {
+    public DaoAdministradores(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Parqueadero_v2.0PU");
@@ -34,19 +33,21 @@ public class ParqueaderoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public ParqueaderoJpaController() {
+    public DaoAdministradores() {
     }
+    
+    
 
-    public void create(Parqueadero parqueadero) throws PreexistingEntityException, Exception {
+    public void create(Administradores administradores) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(parqueadero);
+            em.persist(administradores);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findParqueadero(parqueadero.getNit()) != null) {
-                throw new PreexistingEntityException("Parqueadero " + parqueadero + " ya existe.", ex);
+            if (findAdministradores(administradores.getIdadministrador()) != null) {
+                throw new PreexistingEntityException("El administrador " + administradores + " ya existe.", ex);
             }
             throw ex;
         } finally {
@@ -56,19 +57,23 @@ public class ParqueaderoJpaController implements Serializable {
         }
     }
 
-    public void edit(Parqueadero parqueadero) throws NonexistentEntityException, Exception {
+    public void edit(Administradores administradores) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            String id = parqueadero.getNit();
-            if (findParqueadero(id) == null) {
-                throw new NonexistentEntityException("El parqueadero con id " + id + " no existe.");
-            }else{
-                parqueadero = em.merge(parqueadero);
-                em.getTransaction().commit();
-            }
+            
+            
+            administradores = em.merge(administradores);
+            em.getTransaction().commit();
         } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = administradores.getIdadministrador();
+                if (findAdministradores(id) == null) {
+                    throw new NonexistentEntityException("The administradores with id " + id + " no longer exists.");
+                }
+            }
             throw ex;
         } finally {
             if (em != null) {
@@ -77,19 +82,19 @@ public class ParqueaderoJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Parqueadero parqueadero;
+            Administradores administradores;
             try {
-                parqueadero = em.getReference(Parqueadero.class, id);
-                parqueadero.getNit();
+                administradores = em.getReference(Administradores.class, id);
+                administradores.getIdadministrador();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The parqueadero with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The administradores with id " + id + " no longer exists.", enfe);
             }
-            em.remove(parqueadero);
+            em.remove(administradores);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -98,19 +103,19 @@ public class ParqueaderoJpaController implements Serializable {
         }
     }
 
-    public List<Parqueadero> findParqueaderoEntities() {
-        return findParqueaderoEntities(true, -1, -1);
+    public List<Administradores> findAdministradoresEntities() {
+        return findAdministradoresEntities(true, -1, -1);
     }
 
-    public List<Parqueadero> findParqueaderoEntities(int maxResults, int firstResult) {
-        return findParqueaderoEntities(false, maxResults, firstResult);
+    public List<Administradores> findAdministradoresEntities(int maxResults, int firstResult) {
+        return findAdministradoresEntities(false, maxResults, firstResult);
     }
 
-    private List<Parqueadero> findParqueaderoEntities(boolean all, int maxResults, int firstResult) {
+    private List<Administradores> findAdministradoresEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Parqueadero.class));
+            cq.select(cq.from(Administradores.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -122,20 +127,20 @@ public class ParqueaderoJpaController implements Serializable {
         }
     }
 
-    public Parqueadero findParqueadero(String id) {
+    public Administradores findAdministradores(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Parqueadero.class, id);
+            return em.find(Administradores.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getParqueaderoCount() {
+    public int getAdministradoresCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Parqueadero> rt = cq.from(Parqueadero.class);
+            Root<Administradores> rt = cq.from(Administradores.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package CONTROLADOR;
 
-import CONTROL.OperariosJpaController;
+import DAOS.DaoOperarios;
 import ENTIDAD.Operarios;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carlos
  */
-public class OperarioDAO {
-    private OperariosJpaController ojc = new OperariosJpaController();
+public class ControlOperarios {
+    private DaoOperarios ojc = new DaoOperarios();
     private Operarios operario = new Operarios();
     private String mensaje = "";
     

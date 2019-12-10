@@ -1,7 +1,7 @@
-package DAO;
+package CONTROLADOR;
 
-import CONTROL.ClientesJpaController;
-import CONTROL.ParqueaderoJpaController;
+import DAOS.DaoClientes;
+import DAOS.DaoParqueadero;
 import ENTIDAD.Clientes;
 import ENTIDAD.Parqueadero;
 import FRONTERA.Factura;
@@ -32,14 +32,14 @@ import javax.swing.JOptionPane;
  *
  * @author Carlos
  */
-public class ClienteDAO {
+public class ControlClientes {
 
-    private ClientesJpaController cjc = new ClientesJpaController();
+    private DaoClientes cjc = new DaoClientes();
     private Clientes clientes = new Clientes();
     private String mensaje = "";
     private int tiempoTranscurrido;
-    private ParqueaderoDAO pdao = new ParqueaderoDAO();
-    private ParqueaderoJpaController pjc = new ParqueaderoJpaController();
+    private ControlParqueadero pdao = new ControlParqueadero();
+    private DaoParqueadero pjc = new DaoParqueadero();
     private Parqueadero parqueadero = new Parqueadero();
     public BigInteger Factur;
 
@@ -250,10 +250,10 @@ public class ClienteDAO {
                         factura.txtNombreParqueaderoFactura.setText(nombreparqueadero);
                         factura.txtPolizaFactura.setText(polizaparqueadero);
                         factura.txtRegimenFactura.setText(regimenparqueadero);
-                        factura.txtFormadePago.setText(Operario.cbformaPago.getSelectedItem().toString());
+                        factura.txtFormadePago.setText(formaPago);
                         factura.setVisible(true);
                     }
-                } else {
+                } else if(formaPago.equals("Efectivo")) {
                     int puntosfidelizacion;
                     puntosfidelizacion = puntosf + (tiempoTranscurrido / 60);
                     BigDecimal bdpf = new BigDecimal(puntosfidelizacion);
@@ -327,8 +327,163 @@ public class ClienteDAO {
                     factura.txtNombreParqueaderoFactura.setText(nombreparqueadero);
                     factura.txtPolizaFactura.setText(polizaparqueadero);
                     factura.txtRegimenFactura.setText(regimenparqueadero);
-                    factura.txtFormadePago.setText(Operario.cbformaPago.getSelectedItem().toString());
+                    factura.txtFormadePago.setText(formaPago);
                     factura.setVisible(true);
+                } else if(formaPago.equals("T. Crédito")) {
+                    int puntosfidelizacion;
+                    puntosfidelizacion = puntosf + (tiempoTranscurrido / 60);
+                    BigDecimal bdpf = new BigDecimal(puntosfidelizacion);
+                    bdpf = bdpf.setScale(0, RoundingMode.DOWN);
+                    ActualizacionPuntosCero(buscarClientes(idTicket).getMatricula(), bdpf.intValue());
+
+                    String nitparqueadero = buscarParqueadero().getNit();
+                    String telparqueadero = buscarParqueadero().getTelefono();
+                    String nombreparqueadero = buscarParqueadero().getRazonSocial();
+                    String polizaparqueadero = buscarParqueadero().getPoliza();
+                    String direccionparqueadero = buscarParqueadero().getDireccion();
+                    String regimenparqueadero = buscarParqueadero().getRegimen();
+
+                    Double tarifavehiculo = 0.0;
+                    Double valortotal = 0.0;
+                    Double ivavehiculo = 0.0;
+                    Double baseimponible = 0.0;
+
+                    if (buscarClientes(idTicket).getTipoVehiculo().equals("Automovil")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaAutomovil();
+                    } else if (buscarClientes(idTicket).getTipoVehiculo().equals("Motocicleta")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaMoto();
+                    } else if (buscarClientes(idTicket).getTipoVehiculo().equals("Bicicleta")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaBicicleta();
+                    }
+
+                    valortotal = tarifavehiculo * tiempoTranscurrido;
+                    baseimponible = valortotal / 1.19;
+                    ivavehiculo = baseimponible * 0.19;
+
+                    valortotal = valortotal - (valortotal % 50) + 50;
+                    //baseimponible= baseimponible-(baseimponible%50)+50;
+                    //ivavehiculo = ivavehiculo-(ivavehiculo%50)+50;
+
+                    BigDecimal bdvt = new BigDecimal(valortotal);
+                    bdvt = bdvt.setScale(0, RoundingMode.HALF_UP);
+
+                    BigDecimal bdbi = new BigDecimal(baseimponible);
+                    bdbi = bdbi.setScale(0, RoundingMode.HALF_UP);
+
+                    BigDecimal bdiv = new BigDecimal(ivavehiculo);
+                    bdiv = bdiv.setScale(0, RoundingMode.HALF_UP);
+
+                    clientes.setIdTicket(idTicket);
+                    clientes.setMatricula(buscarClientes(idTicket).getMatricula());
+                    clientes.setTipoVehiculo(buscarClientes(idTicket).getTipoVehiculo());
+                    clientes.setPuntos(bdpf.intValue());
+                    clientes.setEntrada(buscarClientes(idTicket).getEntrada());
+                    clientes.setSalida(salida);
+                    clientes.setTiempo(tiempoTranscurrido);
+                    clientes.setBaseImponible(bdbi.doubleValue());
+                    clientes.setIva(bdiv.doubleValue());
+                    clientes.setValorTotal(bdvt.doubleValue());
+                    cjc.edit(clientes);
+                    mensaje = "Salida correcta";
+
+                    buscarClientes(idTicket);
+                    Factura factura = new Factura();
+                    factura.txtIdFactura.setText(clientes.getIdTicket() + "");
+                    factura.txtEntradafactura.setText(clientes.getEntrada());
+                    factura.txtDuracionFactura.setText(clientes.getTiempo() + "");
+                    factura.txtSalidaFactura.setText(clientes.getSalida());
+                    factura.txtIvaFactura.setText(clientes.getIva() + "");
+                    factura.txtValorTotalFactura.setText(clientes.getValorTotal() + "");
+                    factura.txtBaseImponibleFactura.setText(clientes.getBaseImponible() + "");
+                    factura.txtMatriculafactura.setText(clientes.getMatricula());
+                    factura.txtPuntosFactura.setText(clientes.getPuntos() + "");
+                    factura.txtNITParqueaderoFactura.setText(nitparqueadero);
+                    factura.txtTelefonoFactura.setText(telparqueadero);
+                    factura.txtDireccionFactura.setText(direccionparqueadero);
+                    factura.txtNombreParqueaderoFactura.setText(nombreparqueadero);
+                    factura.txtPolizaFactura.setText(polizaparqueadero);
+                    factura.txtRegimenFactura.setText(regimenparqueadero);
+                    factura.txtFormadePago.setText(formaPago);
+                    factura.setVisible(true);
+                }else if(formaPago.equals("T. Débito")) {
+                    int puntosfidelizacion;
+                    puntosfidelizacion = puntosf + (tiempoTranscurrido / 60);
+                    BigDecimal bdpf = new BigDecimal(puntosfidelizacion);
+                    bdpf = bdpf.setScale(0, RoundingMode.DOWN);
+                    ActualizacionPuntosCero(buscarClientes(idTicket).getMatricula(), bdpf.intValue());
+
+                    String nitparqueadero = buscarParqueadero().getNit();
+                    String telparqueadero = buscarParqueadero().getTelefono();
+                    String nombreparqueadero = buscarParqueadero().getRazonSocial();
+                    String polizaparqueadero = buscarParqueadero().getPoliza();
+                    String direccionparqueadero = buscarParqueadero().getDireccion();
+                    String regimenparqueadero = buscarParqueadero().getRegimen();
+
+                    Double tarifavehiculo = 0.0;
+                    Double valortotal = 0.0;
+                    Double ivavehiculo = 0.0;
+                    Double baseimponible = 0.0;
+
+                    if (buscarClientes(idTicket).getTipoVehiculo().equals("Automovil")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaAutomovil();
+                    } else if (buscarClientes(idTicket).getTipoVehiculo().equals("Motocicleta")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaMoto();
+                    } else if (buscarClientes(idTicket).getTipoVehiculo().equals("Bicicleta")) {
+                        tarifavehiculo = pjc.findParqueadero(nitparqueadero).getTarifaBicicleta();
+                    }
+
+                    valortotal = tarifavehiculo * tiempoTranscurrido;
+                    baseimponible = valortotal / 1.19;
+                    ivavehiculo = baseimponible * 0.19;
+
+                    valortotal = valortotal - (valortotal % 50) + 50;
+                    //baseimponible= baseimponible-(baseimponible%50)+50;
+                    //ivavehiculo = ivavehiculo-(ivavehiculo%50)+50;
+
+                    BigDecimal bdvt = new BigDecimal(valortotal);
+                    bdvt = bdvt.setScale(0, RoundingMode.HALF_UP);
+
+                    BigDecimal bdbi = new BigDecimal(baseimponible);
+                    bdbi = bdbi.setScale(0, RoundingMode.HALF_UP);
+
+                    BigDecimal bdiv = new BigDecimal(ivavehiculo);
+                    bdiv = bdiv.setScale(0, RoundingMode.HALF_UP);
+
+                    clientes.setIdTicket(idTicket);
+                    clientes.setMatricula(buscarClientes(idTicket).getMatricula());
+                    clientes.setTipoVehiculo(buscarClientes(idTicket).getTipoVehiculo());
+                    clientes.setPuntos(bdpf.intValue());
+                    clientes.setEntrada(buscarClientes(idTicket).getEntrada());
+                    clientes.setSalida(salida);
+                    clientes.setTiempo(tiempoTranscurrido);
+                    clientes.setBaseImponible(bdbi.doubleValue());
+                    clientes.setIva(bdiv.doubleValue());
+                    clientes.setValorTotal(bdvt.doubleValue());
+                    cjc.edit(clientes);
+                    mensaje = "Salida correcta";
+
+                    buscarClientes(idTicket);
+                    Factura factura = new Factura();
+                    factura.txtIdFactura.setText(clientes.getIdTicket() + "");
+                    factura.txtEntradafactura.setText(clientes.getEntrada());
+                    factura.txtDuracionFactura.setText(clientes.getTiempo() + "");
+                    factura.txtSalidaFactura.setText(clientes.getSalida());
+                    factura.txtIvaFactura.setText(clientes.getIva() + "");
+                    factura.txtValorTotalFactura.setText(clientes.getValorTotal() + "");
+                    factura.txtBaseImponibleFactura.setText(clientes.getBaseImponible() + "");
+                    factura.txtMatriculafactura.setText(clientes.getMatricula());
+                    factura.txtPuntosFactura.setText(clientes.getPuntos() + "");
+                    factura.txtNITParqueaderoFactura.setText(nitparqueadero);
+                    factura.txtTelefonoFactura.setText(telparqueadero);
+                    factura.txtDireccionFactura.setText(direccionparqueadero);
+                    factura.txtNombreParqueaderoFactura.setText(nombreparqueadero);
+                    factura.txtPolizaFactura.setText(polizaparqueadero);
+                    factura.txtRegimenFactura.setText(regimenparqueadero);
+                    factura.txtFormadePago.setText(formaPago);
+                    factura.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Forma de pago inexistente");
+                    System.out.println("Forma de pago inexistente");
                 }
             }
         } catch (Exception e) {

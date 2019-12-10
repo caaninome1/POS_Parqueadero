@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CONTROL;
+package DAOS;
 
 import CONTROL.exceptions.NonexistentEntityException;
-import CONTROL.exceptions.PreexistingEntityException;
-import ENTIDAD.Administradores;
+import ENTIDAD.Clientes;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,9 +22,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Carlos
  */
-public class AdministradoresJpaController implements Serializable {
+public class DaoClientes implements Serializable {
 
-    public AdministradoresJpaController(EntityManagerFactory emf) {
+    public DaoClientes(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Parqueadero_v2.0PU");
@@ -33,22 +33,37 @@ public class AdministradoresJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public AdministradoresJpaController() {
+    public DaoClientes() {
     }
     
-    
 
-    public void create(Administradores administradores) throws PreexistingEntityException, Exception {
+    public void create(Clientes clientes) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(administradores);
+            em.persist(clientes);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findAdministradores(administradores.getIdadministrador()) != null) {
-                throw new PreexistingEntityException("El administrador " + administradores + " ya existe.", ex);
+        } finally {
+            if (em != null) {
+                em.close();
             }
+        }
+    }
+
+    public void edit(Clientes clientes) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            BigInteger id = clientes.getIdTicket();
+            if (findClientes(id) == null) {
+                throw new NonexistentEntityException("The clientes with id " + id + " no longer exists.");
+            }else{
+                clientes = em.merge(clientes);
+                em.getTransaction().commit();
+            } 
+        } catch (Exception ex) {
             throw ex;
         } finally {
             if (em != null) {
@@ -57,44 +72,19 @@ public class AdministradoresJpaController implements Serializable {
         }
     }
 
-    public void edit(Administradores administradores) throws NonexistentEntityException, Exception {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            
-            
-            administradores = em.merge(administradores);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Integer id = administradores.getIdadministrador();
-                if (findAdministradores(id) == null) {
-                    throw new NonexistentEntityException("The administradores with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Administradores administradores;
+            Clientes clientes;
             try {
-                administradores = em.getReference(Administradores.class, id);
-                administradores.getIdadministrador();
+                clientes = em.getReference(Clientes.class, id);
+                clientes.getIdTicket();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The administradores with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The clientes with id " + id + " no longer exists.", enfe);
             }
-            em.remove(administradores);
+            em.remove(clientes);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -103,19 +93,19 @@ public class AdministradoresJpaController implements Serializable {
         }
     }
 
-    public List<Administradores> findAdministradoresEntities() {
-        return findAdministradoresEntities(true, -1, -1);
+    public List<Clientes> findClientesEntities() {
+        return findClientesEntities(true, -1, -1);
     }
 
-    public List<Administradores> findAdministradoresEntities(int maxResults, int firstResult) {
-        return findAdministradoresEntities(false, maxResults, firstResult);
+    public List<Clientes> findClientesEntities(int maxResults, int firstResult) {
+        return findClientesEntities(false, maxResults, firstResult);
     }
 
-    private List<Administradores> findAdministradoresEntities(boolean all, int maxResults, int firstResult) {
+    private List<Clientes> findClientesEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Administradores.class));
+            cq.select(cq.from(Clientes.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -127,20 +117,20 @@ public class AdministradoresJpaController implements Serializable {
         }
     }
 
-    public Administradores findAdministradores(Integer id) {
+    public Clientes findClientes(BigInteger id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Administradores.class, id);
+            return em.find(Clientes.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAdministradoresCount() {
+    public int getClientesCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Administradores> rt = cq.from(Administradores.class);
+            Root<Clientes> rt = cq.from(Clientes.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

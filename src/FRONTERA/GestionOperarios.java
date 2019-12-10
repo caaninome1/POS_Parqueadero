@@ -5,7 +5,7 @@
  */
 package FRONTERA;
 
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlOperarios;
 import ENTIDAD.Operarios;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -23,7 +23,7 @@ public class GestionOperarios extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    private OperarioDAO odao = new OperarioDAO();
+    private ControlOperarios odao = new ControlOperarios();
     
     public GestionOperarios() {
         initComponents();

@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package FRONTERA;
-import CONTROL.ClientesJpaController;
-import DAO.ClienteDAO;
+import DAOS.DaoClientes;
+import CONTROLADOR.ControlClientes;
 import ENTIDAD.Clientes;
 import java.math.BigInteger;
 import javax.swing.JOptionPane;

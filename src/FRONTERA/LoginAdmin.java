@@ -5,7 +5,7 @@
  */
 package FRONTERA;
 
-import DAO.AdministradoresDAO;
+import CONTROLADOR.ControlAdministradores;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -25,7 +25,7 @@ public class LoginAdmin extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    private AdministradoresDAO adao = new AdministradoresDAO();
+    private ControlAdministradores adao = new ControlAdministradores();
     public LoginAdmin() {
         initComponents();
         setResizable(false);

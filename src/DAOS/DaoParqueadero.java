@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CONTROL;
+package DAOS;
 
 import CONTROL.exceptions.NonexistentEntityException;
-import ENTIDAD.Clientes;
+import CONTROL.exceptions.PreexistingEntityException;
+import ENTIDAD.Parqueadero;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.security.AccessControlException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,9 +23,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Carlos
  */
-public class ClientesJpaController implements Serializable {
+public class DaoParqueadero implements Serializable {
 
-    public ClientesJpaController(EntityManagerFactory emf) {
+    public DaoParqueadero(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Parqueadero_v2.0PU");
@@ -33,17 +34,21 @@ public class ClientesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public ClientesJpaController() {
+    public DaoParqueadero() {
     }
-    
 
-    public void create(Clientes clientes) {
+    public void create(Parqueadero parqueadero) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(clientes);
+            em.persist(parqueadero);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findParqueadero(parqueadero.getNit()) != null) {
+                throw new PreexistingEntityException("Parqueadero " + parqueadero + " ya existe.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -51,18 +56,18 @@ public class ClientesJpaController implements Serializable {
         }
     }
 
-    public void edit(Clientes clientes) throws NonexistentEntityException, Exception {
+    public void edit(Parqueadero parqueadero) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            BigInteger id = clientes.getIdTicket();
-            if (findClientes(id) == null) {
-                throw new NonexistentEntityException("The clientes with id " + id + " no longer exists.");
+            String id = parqueadero.getNit();
+            if (findParqueadero(id) == null) {
+                throw new NonexistentEntityException("El parqueadero con id " + id + " no existe.");
             }else{
-                clientes = em.merge(clientes);
+                parqueadero = em.merge(parqueadero);
                 em.getTransaction().commit();
-            } 
+            }
         } catch (Exception ex) {
             throw ex;
         } finally {
@@ -72,19 +77,19 @@ public class ClientesJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Clientes clientes;
+            Parqueadero parqueadero;
             try {
-                clientes = em.getReference(Clientes.class, id);
-                clientes.getIdTicket();
+                parqueadero = em.getReference(Parqueadero.class, id);
+                parqueadero.getNit();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The clientes with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The parqueadero with id " + id + " no longer exists.", enfe);
             }
-            em.remove(clientes);
+            em.remove(parqueadero);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -93,19 +98,19 @@ public class ClientesJpaController implements Serializable {
         }
     }
 
-    public List<Clientes> findClientesEntities() {
-        return findClientesEntities(true, -1, -1);
+    public List<Parqueadero> findParqueaderoEntities() {
+        return findParqueaderoEntities(true, -1, -1);
     }
 
-    public List<Clientes> findClientesEntities(int maxResults, int firstResult) {
-        return findClientesEntities(false, maxResults, firstResult);
+    public List<Parqueadero> findParqueaderoEntities(int maxResults, int firstResult) {
+        return findParqueaderoEntities(false, maxResults, firstResult);
     }
 
-    private List<Clientes> findClientesEntities(boolean all, int maxResults, int firstResult) {
+    private List<Parqueadero> findParqueaderoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Clientes.class));
+            cq.select(cq.from(Parqueadero.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -117,20 +122,20 @@ public class ClientesJpaController implements Serializable {
         }
     }
 
-    public Clientes findClientes(BigInteger id) {
+    public Parqueadero findParqueadero(String id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Clientes.class, id);
+            return em.find(Parqueadero.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getClientesCount() {
+    public int getParqueaderoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Clientes> rt = cq.from(Clientes.class);
+            Root<Parqueadero> rt = cq.from(Parqueadero.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

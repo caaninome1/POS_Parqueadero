@@ -5,7 +5,7 @@
  */
 package FRONTERA;
 
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlOperarios;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -22,7 +22,7 @@ public class LoginOperario extends javax.swing.JFrame {
     private int x;
     private int y;
     
-    private OperarioDAO odao = new OperarioDAO();
+    private ControlOperarios odao = new ControlOperarios();
     public LoginOperario() {
         initComponents();
         setResizable(false);

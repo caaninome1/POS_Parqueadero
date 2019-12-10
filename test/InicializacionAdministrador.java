@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import DAO.AdministradoresDAO;
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlAdministradores;
+import CONTROLADOR.ControlOperarios;
 import ENTIDAD.Administradores;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,7 +44,7 @@ public class InicializacionAdministrador {
     //
     @Test
     public void insertarAdministradores() {
-        AdministradoresDAO adao = new AdministradoresDAO();
+        ControlAdministradores adao = new ControlAdministradores();
                 
         System.out.println(adao.insertarAdministrador("", ""));
         System.out.println(adao.insertarAdministrador("caaninome", "12345"));
@@ -55,7 +55,7 @@ public class InicializacionAdministrador {
         
     @Test
     public void loginAdministradores(){
-        AdministradoresDAO adao = new AdministradoresDAO();
+        ControlAdministradores adao = new ControlAdministradores();
         
         System.out.println(adao.login("", ""));
         System.out.println(adao.login("caaninome","1234" ));

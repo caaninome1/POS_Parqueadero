@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CONTROL;
+package DAOS;
 
 import CONTROL.exceptions.NonexistentEntityException;
 import ENTIDAD.Operarios;
@@ -21,9 +21,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Carlos
  */
-public class OperariosJpaController implements Serializable {
+public class DaoOperarios implements Serializable {
 
-    public OperariosJpaController(EntityManagerFactory emf) {
+    public DaoOperarios(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Parqueadero_v2.0PU");
@@ -32,7 +32,7 @@ public class OperariosJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public OperariosJpaController() {
+    public DaoOperarios() {
     }
     
     

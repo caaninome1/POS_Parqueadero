@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlOperarios;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class TestEliminarOperario {
 
     @Test
     public void eliminarOperario(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         System.out.println(odao.eliminarOperario(""));
         System.out.println(odao.eliminarOperario("0123"));
         System.out.println(odao.eliminarOperario("0"));

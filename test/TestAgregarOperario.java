@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlOperarios;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -39,7 +39,7 @@ public class TestAgregarOperario {
 
     @Test 
     public void insertarOperarios(){
-       OperarioDAO odao = new OperarioDAO();
+       ControlOperarios odao = new ControlOperarios();
         
         System.out.println(odao.insertarOperario("", "", "", ""));
         System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345"));

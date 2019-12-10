@@ -5,7 +5,7 @@
  */
 package FRONTERA;
 
-import DAO.ParqueaderoDAO;
+import CONTROLADOR.ControlParqueadero;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -21,7 +21,7 @@ public class CrearParqueadero extends javax.swing.JFrame {
     /**
      * Creates new form CrearActualizarParqueadero
      */
-    private ParqueaderoDAO pdao = new ParqueaderoDAO();
+    private ControlParqueadero pdao = new ControlParqueadero();
     
     public CrearParqueadero() {
         initComponents();

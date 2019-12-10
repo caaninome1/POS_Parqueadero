@@ -1,5 +1,5 @@
-import DAO.AdministradoresDAO;
-import DAO.OperarioDAO;
+import CONTROLADOR.ControlAdministradores;
+import CONTROLADOR.ControlOperarios;
 import ENTIDAD.Administradores;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,7 +37,7 @@ public class InicializacionOperario {
     
     @Test 
     public void loginOperario(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         
         System.out.println(odao.loginOperario("", ""));
         System.out.println(odao.loginOperario("caaninome", "12345"));
@@ -52,7 +52,7 @@ public class InicializacionOperario {
     
     @Test
     public void actualizarOperario(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         
         System.out.println(odao.actualizarOperario("", "", "", ""));
         System.out.println(odao.actualizarOperario("0123456789", "Carlos", "caaninome", "12345"));
@@ -76,7 +76,7 @@ public class InicializacionOperario {
     
     @Test 
     public void verificarLongitudNombre(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         System.out.println(odao.verificarLongitudNombre(""));
         System.out.println(odao.verificarLongitudNombre("C"));
         System.out.println(odao.verificarLongitudNombre("Carlos De las siete vírgenes Torcuato y Castebeldía Diomedes Turanga Armero y Palacios"));
@@ -86,7 +86,7 @@ public class InicializacionOperario {
 
     @Test 
     public void verificarLongitudUsuario(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         System.out.println(odao.verificarLongitudUsuario(""));
         System.out.println(odao.verificarLongitudUsuario("c"));
         System.out.println(odao.verificarLongitudUsuario("caaninome Terrealba Castebeldía Diomedes Turanga Armero y Palacios"));
@@ -96,7 +96,7 @@ public class InicializacionOperario {
     
     @Test 
     public void verificarLongituPassword(){
-        OperarioDAO odao = new OperarioDAO();
+        ControlOperarios odao = new ControlOperarios();
         System.out.println(odao.verificarLongitudPassword(""));
         System.out.println(odao.verificarLongitudPassword("0"));
         System.out.println(odao.verificarLongitudPassword("012345678901234567890123456789"));
