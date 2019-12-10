@@ -10,6 +10,7 @@ import java.awt.print.*;
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -25,6 +26,8 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Ticket Generado");
+        Toolkit t= Toolkit.getDefaultToolkit();
+        setIconImage(t.getImage(getClass().getResource("/FRONTERA/favicon.png")));
     }
 
     /**
@@ -58,6 +61,7 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         btnGenerarTicket = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(getIconImage());
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,9 +72,13 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         ticket.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNombreParqueaderoTicket.setEditable(false);
+        txtNombreParqueaderoTicket.setBackground(new java.awt.Color(255, 255, 255));
         txtNombreParqueaderoTicket.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNombreParqueaderoTicket.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreParqueaderoTicket.setBorder(null);
+        txtNombreParqueaderoTicket.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtNombreParqueaderoTicket.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        txtNombreParqueaderoTicket.setOpaque(false);
         ticket.add(txtNombreParqueaderoTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 20));
 
         txtNITTicket.setText("NIT");
@@ -80,30 +88,35 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         txtEntradaTicket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtEntradaTicket.setToolTipText("");
         txtEntradaTicket.setBorder(null);
+        txtEntradaTicket.setOpaque(false);
         ticket.add(txtEntradaTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 150, -1));
 
         txtNITticket.setEditable(false);
         txtNITticket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNITticket.setToolTipText("");
         txtNITticket.setBorder(null);
+        txtNITticket.setOpaque(false);
         ticket.add(txtNITticket, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 80, -1));
 
         txtTelTicket.setEditable(false);
         txtTelTicket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTelTicket.setToolTipText("");
         txtTelTicket.setBorder(null);
+        txtTelTicket.setOpaque(false);
         ticket.add(txtTelTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 80, -1));
 
         txtDireccionTicket.setEditable(false);
         txtDireccionTicket.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDireccionTicket.setToolTipText("");
         txtDireccionTicket.setBorder(null);
+        txtDireccionTicket.setOpaque(false);
         ticket.add(txtDireccionTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 230, -1));
 
         txtRegimenTicket.setEditable(false);
         txtRegimenTicket.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtRegimenTicket.setToolTipText("");
         txtRegimenTicket.setBorder(null);
+        txtRegimenTicket.setOpaque(false);
         ticket.add(txtRegimenTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
 
         jSeparator1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -122,18 +135,21 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         txtPolizaTicket.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPolizaTicket.setToolTipText("");
         txtPolizaTicket.setBorder(null);
+        txtPolizaTicket.setOpaque(false);
         ticket.add(txtPolizaTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 100, -1));
 
         txtNoTicket.setEditable(false);
         txtNoTicket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtNoTicket.setToolTipText("");
         txtNoTicket.setBorder(null);
+        txtNoTicket.setOpaque(false);
         ticket.add(txtNoTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
 
         txtMatriculaTicket.setEditable(false);
         txtMatriculaTicket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMatriculaTicket.setToolTipText("");
         txtMatriculaTicket.setBorder(null);
+        txtMatriculaTicket.setOpaque(false);
         ticket.add(txtMatriculaTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 100, -1));
 
         jLabel4.setText("Ticket No.");
@@ -191,6 +207,8 @@ public class Ticket extends javax.swing.JFrame implements Printable {
                     break;
                 }
             }
+//          try {
+//              UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Ticket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

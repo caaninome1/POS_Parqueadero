@@ -2,10 +2,13 @@ package FRONTERA;
 
 import DAO.ClienteDAO;
 import ENTIDAD.Clientes;
+import java.awt.Color;
+import java.awt.Toolkit;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import javax.swing.JOptionPane;
 import java.time.Instant;
+import javax.swing.UIManager;
 
 /**
  *
@@ -15,12 +18,17 @@ public class Operario extends javax.swing.JFrame {
 
     private ClienteDAO cdao = new ClienteDAO();
     
+    private int x;
+    private int y;
+    
     public Operario() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("OPERARIO");
         mostrarTabla();
+        Toolkit t= Toolkit.getDefaultToolkit();
+        setIconImage(t.getImage(getClass().getResource("/FRONTERA/favicon.png")));
         
     }
 
@@ -60,30 +68,53 @@ public class Operario extends javax.swing.JFrame {
         cbformaPago = new javax.swing.JComboBox();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        btnMinimizar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
+        lblSuperior = new javax.swing.JLabel();
+        lblicono = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESO Y SALIDA DE CLIENTES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 360, -1));
 
-        btnCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseExited(evt);
+            }
+        });
         btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarSesionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 170, -1));
+        jPanel1.add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 170, 30));
 
         btnIngreso.setBackground(new java.awt.Color(0, 255, 0));
-        btnIngreso.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnIngreso.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         btnIngreso.setText("INGRESO");
+        btnIngreso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnIngresoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnIngresoMouseExited(evt);
+            }
+        });
         btnIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresoActionPerformed(evt);
@@ -92,8 +123,16 @@ public class Operario extends javax.swing.JFrame {
         jPanel1.add(btnIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 170, 40));
 
         btnSalida.setBackground(new java.awt.Color(255, 0, 0));
-        btnSalida.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnSalida.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         btnSalida.setText("SALIDA");
+        btnSalida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalidaMouseExited(evt);
+            }
+        });
         btnSalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalidaActionPerformed(evt);
@@ -101,19 +140,28 @@ public class Operario extends javax.swing.JFrame {
         });
         jPanel1.add(btnSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 170, 40));
 
-        btnIngresosRegistrados.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnIngresosRegistrados.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnIngresosRegistrados.setText("Ingresos Registrados");
-        jPanel1.add(btnIngresosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 230, -1));
+        btnIngresosRegistrados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnIngresosRegistradosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnIngresosRegistradosMouseExited(evt);
+            }
+        });
+        jPanel1.add(btnIngresosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 230, 30));
 
-        cbTipoVehiculo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cbTipoVehiculo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         cbTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automovil", "Motocicleta", "Bicicleta" }));
-        jPanel1.add(cbTipoVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 140, -1));
+        jPanel1.add(cbTipoVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 140, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Matrícula");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        txtMatricula.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtMatricula.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         txtMatricula.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -123,59 +171,78 @@ public class Operario extends javax.swing.JFrame {
                 txtMatriculaKeyTyped(evt);
             }
         });
-        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 130, -1));
+        jPanel1.add(txtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 81, 130, 30));
 
-        txtIdTicket.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtIdTicket.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         txtIdTicket.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtIdTicket.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtIdTicketKeyTyped(evt);
             }
         });
-        jPanel1.add(txtIdTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 130, -1));
+        jPanel1.add(txtIdTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 130, 30));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Id Ticket");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 80, 30));
 
-        btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpiarMouseExited(evt);
+            }
+        });
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 140, -1));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 140, 30));
 
-        btnBuscarIdTicket.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnBuscarIdTicket.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnBuscarIdTicket.setText("Buscar");
+        btnBuscarIdTicket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarIdTicketMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarIdTicketMouseExited(evt);
+            }
+        });
         btnBuscarIdTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarIdTicketActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarIdTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 140, -1));
+        jPanel1.add(btnBuscarIdTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 140, 30));
 
         txtValorTotal.setEditable(false);
-        txtValorTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtValorTotal.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtValorTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtValorTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorTotalActionPerformed(evt);
             }
         });
-        jPanel1.add(txtValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, 180, -1));
+        jPanel1.add(txtValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, 180, 25));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha Entrada");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, 100, 20));
 
-        LValorTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LValorTotal.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        LValorTotal.setForeground(new java.awt.Color(255, 255, 255));
         LValorTotal.setText("Valor TOTAL ($)");
         jPanel1.add(LValorTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, -1, 20));
 
         txtFechaEntrada.setEditable(false);
-        txtFechaEntrada.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtFechaEntrada.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         txtFechaEntrada.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtFechaEntrada.setToolTipText("");
         txtFechaEntrada.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -184,27 +251,30 @@ public class Operario extends javax.swing.JFrame {
                 txtFechaEntradaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 180, -1));
+        jPanel1.add(txtFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 180, 25));
 
         txtFechaSalida.setEditable(false);
-        txtFechaSalida.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtFechaSalida.setFont(new java.awt.Font("Segoe UI Semibold", 1, 12)); // NOI18N
         txtFechaSalida.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(txtFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 180, -1));
+        jPanel1.add(txtFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 180, 25));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Fecha Salida");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 90, 20));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Base Imponible");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 110, 20));
 
         txtBaseImponible.setEditable(false);
-        txtBaseImponible.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtBaseImponible.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtBaseImponible.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(txtBaseImponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 180, -1));
+        jPanel1.add(txtBaseImponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 180, 25));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("IVA");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 230, 40, 20));
 
@@ -226,38 +296,110 @@ public class Operario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbClienteDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 900, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 900, 140));
 
-        Puntos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Puntos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        Puntos.setForeground(new java.awt.Color(255, 255, 255));
         Puntos.setText("Puntos");
         jPanel1.add(Puntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 70, 20));
 
         txtPuntos.setEditable(false);
-        txtPuntos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPuntos.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtPuntos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(txtPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 170, 180, -1));
+        jPanel1.add(txtPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 170, 180, 25));
 
         txtIVA.setEditable(false);
-        txtIVA.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtIVA.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtIVA.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 180, -1));
+        jPanel1.add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 180, 25));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Tiempo (min)");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
 
         txtTiempo.setEditable(false);
-        txtTiempo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtTiempo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         txtTiempo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jPanel1.add(txtTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 180, -1));
+        jPanel1.add(txtTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 180, 25));
 
-        cbformaPago.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cbformaPago.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         cbformaPago.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Efectivo", "T. Crédito", "T. Débito", "Puntos" }));
         jPanel1.add(cbformaPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 140, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 580, 10));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 580, 10));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 530));
+        btnMinimizar.setBackground(new java.awt.Color(255, 255, 255));
+        btnMinimizar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnMinimizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/btnminimizar.png"))); // NOI18N
+        btnMinimizar.setBorder(null);
+        btnMinimizar.setBorderPainted(false);
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnMinimizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnMinimizar.setOpaque(false);
+        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseExited(evt);
+            }
+        });
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
+        btnMinimizar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                btnMinimizarPropertyChange(evt);
+            }
+        });
+        jPanel1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 20, 20));
+
+        btnCerrar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/btncerrar.png"))); // NOI18N
+        btnCerrar.setBorder(null);
+        btnCerrar.setBorderPainted(false);
+        btnCerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrar.setOpaque(false);
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseExited(evt);
+            }
+        });
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 20, -1));
+
+        lblSuperior.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                lblSuperiorMouseDragged(evt);
+            }
+        });
+        lblSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSuperiorMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 30));
+
+        lblicono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/logotipo.png"))); // NOI18N
+        jPanel1.add(lblicono, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 100, -1));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/fondo4.jpg"))); // NOI18N
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -295,7 +437,8 @@ public class Operario extends javax.swing.JFrame {
             limpiar();          
         }else{
         BigInteger IdTicket = new BigInteger(txtIdTicket.getText());
-        mensaje = cdao.salidaCliente(IdTicket); 
+        String formaPago = cbformaPago.getSelectedItem().toString();
+        mensaje = cdao.salidaCliente(IdTicket,formaPago ); 
         
         JOptionPane.showMessageDialog(null, mensaje);
         mostrarTabla();
@@ -362,6 +505,92 @@ public class Operario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIdTicketKeyTyped
 
+    private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
+        btnMinimizar.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnMinimizarMouseEntered
+
+    private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
+        btnMinimizar.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnMinimizarMouseExited
+
+    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMinimizarActionPerformed
+
+    private void btnMinimizarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_btnMinimizarPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMinimizarPropertyChange
+
+    private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
+        btnCerrar.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnCerrarMouseEntered
+
+    private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
+        btnCerrar.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnCerrarMouseExited
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void lblSuperiorMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuperiorMouseDragged
+        this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
+    }//GEN-LAST:event_lblSuperiorMouseDragged
+
+    private void lblSuperiorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuperiorMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_lblSuperiorMousePressed
+
+    private void btnIngresosRegistradosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresosRegistradosMouseEntered
+        btnIngresosRegistrados.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnIngresosRegistradosMouseEntered
+
+    private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
+        btnLimpiar.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnLimpiarMouseEntered
+
+    private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
+        btnCerrarSesion.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnCerrarSesionMouseEntered
+
+    private void btnBuscarIdTicketMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarIdTicketMouseEntered
+        btnBuscarIdTicket.setBackground(new Color(255,204,0));
+    }//GEN-LAST:event_btnBuscarIdTicketMouseEntered
+
+    private void btnIngresosRegistradosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresosRegistradosMouseExited
+        btnIngresosRegistrados.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnIngresosRegistradosMouseExited
+
+    private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
+        btnLimpiar.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
+        btnCerrarSesion.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnCerrarSesionMouseExited
+
+    private void btnBuscarIdTicketMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarIdTicketMouseExited
+        btnBuscarIdTicket.setBackground(new Color(240,240,240));
+    }//GEN-LAST:event_btnBuscarIdTicketMouseExited
+
+    private void btnIngresoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseExited
+        btnIngreso.setBackground(new Color(0,255,0));
+    }//GEN-LAST:event_btnIngresoMouseExited
+
+    private void btnSalidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseExited
+        btnSalida.setBackground(new Color(255,0,0));
+    }//GEN-LAST:event_btnSalidaMouseExited
+
+    private void btnIngresoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseEntered
+        btnIngreso.setBackground(new Color(51,255,51));
+    }//GEN-LAST:event_btnIngresoMouseEntered
+
+    private void btnSalidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseEntered
+        btnSalida.setBackground(new Color(255,51,51));
+    }//GEN-LAST:event_btnSalidaMouseEntered
+
+
     /**
      * @param args the command line arguments
      */
@@ -394,6 +623,8 @@ public class Operario extends javax.swing.JFrame {
                     break;
                 }
             }
+//          try {
+//              UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Operario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -417,10 +648,12 @@ public class Operario extends javax.swing.JFrame {
     private javax.swing.JLabel LValorTotal;
     private javax.swing.JLabel Puntos;
     private javax.swing.JButton btnBuscarIdTicket;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnIngreso;
     private javax.swing.JButton btnIngresosRegistrados;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnMinimizar;
     private javax.swing.JButton btnSalida;
     private javax.swing.JComboBox cbTipoVehiculo;
     public static javax.swing.JComboBox cbformaPago;
@@ -436,6 +669,9 @@ public class Operario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblSuperior;
+    private javax.swing.JLabel lblicono;
     private javax.swing.JTable tbClienteDatos;
     private javax.swing.JTextField txtBaseImponible;
     private javax.swing.JTextField txtFechaEntrada;

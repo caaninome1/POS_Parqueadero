@@ -25,6 +25,8 @@ public class Factura extends javax.swing.JFrame implements Printable {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Factura Generada");
+        Toolkit t= Toolkit.getDefaultToolkit();
+        setIconImage(t.getImage(getClass().getResource("/FRONTERA/favicon.png")));
     }
 
     /**

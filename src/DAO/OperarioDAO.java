@@ -68,8 +68,6 @@ public class OperarioDAO {
                 mensaje = "Longitud de Usuario incorrecta";
             }else if(verificarLongitudNombre(nombre)==false){
                 mensaje = "Longitud de Nombre incorrecta";
-            }else if(ojc.findOperarios(id)!=null){
-                mensaje="Ya existe el operario";
             }else{
             ojc.edit(operario);
             mensaje = "Actualizado correctamente";

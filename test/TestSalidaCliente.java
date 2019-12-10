@@ -41,13 +41,13 @@ public class TestSalidaCliente {
     @Test
     public void salidaClientes(){
         ClienteDAO cdao = new ClienteDAO();
-             
-        System.out.println(cdao.salidaCliente(new BigInteger("2")));
-        System.out.println(cdao.salidaCliente(new BigInteger("3")));
-        System.out.println(cdao.salidaCliente(new BigInteger("3")));
-        System.out.println(cdao.salidaCliente(new BigInteger("18")));
-        System.out.println(cdao.salidaCliente(new BigInteger("0")));
-        System.out.println(cdao.salidaCliente(new BigInteger("-1")));
-       
+        
+//        System.out.println(cdao.salidaCliente(new BigInteger("2")));
+//        System.out.println(cdao.salidaCliente(new BigInteger("3")));
+//        System.out.println(cdao.salidaCliente(new BigInteger("3")));
+//        System.out.println(cdao.salidaCliente(new BigInteger("18")));
+//        System.out.println(cdao.salidaCliente(new BigInteger("0")));
+//        System.out.println(cdao.salidaCliente(new BigInteger("-1")));
+        System.out.println(cdao.salidaCliente(new BigInteger("12"),"Puntos"));
     }
 }

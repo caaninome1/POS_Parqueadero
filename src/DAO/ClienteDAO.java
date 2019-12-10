@@ -146,7 +146,7 @@ public class ClienteDAO {
         return mensaje;
     }
 
-    public String salidaCliente(BigInteger idTicket) {
+    public String salidaCliente(BigInteger idTicket, String formaPago) {
 
         try {
             Clientes c = new Clientes();
@@ -170,7 +170,8 @@ public class ClienteDAO {
                     System.out.println("Error al obtener el tiempo: " + ex.getMessage());
                 }
                 int puntosf = puntosFidelizacion(buscarClientes(idTicket).getMatricula());
-                if (Operario.cbformaPago.getSelectedItem().equals("Puntos")) {
+                
+                if (formaPago.equals("Puntos")) {
                     if ((puntosf - (tiempoTranscurrido)) < 0) {
                         mensaje = "No es posible redimir los puntos";
                     } else {
@@ -306,7 +307,6 @@ public class ClienteDAO {
                     clientes.setBaseImponible(bdbi.doubleValue());
                     clientes.setIva(bdiv.doubleValue());
                     clientes.setValorTotal(bdvt.doubleValue());
-
                     cjc.edit(clientes);
                     mensaje = "Salida correcta";
 

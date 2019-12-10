@@ -137,7 +137,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }
                 }else if(parqueadero.getTipoParqueadero().equals("Subterráneo, un solo nivel y 50 cupos o más")){
                     if ((parqueadero.getTarifaAutomovil()> 99) || (parqueadero.getTarifaMoto()>69) || (parqueadero.getTarifaBicicleta()> 10)) {
@@ -147,7 +147,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }  
                 }else if(parqueadero.getTipoParqueadero().equals("Subterráneo, un solo nivel con menos de 50 cupos")){
                     if ((parqueadero.getTarifaAutomovil()> 88) || (parqueadero.getTarifaMoto()>62) || (parqueadero.getTarifaBicicleta()> 10)) {
@@ -157,7 +157,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }
                 }else if(parqueadero.getTipoParqueadero().equals("A nivel, piso en concreto, asfalto o gravilla lavada de rio compactada, y con 50 cupos o más")){
                     if ((parqueadero.getTarifaAutomovil()> 77) || (parqueadero.getTarifaMoto()>54) || (parqueadero.getTarifaBicicleta()> 10)) {
@@ -167,7 +167,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }
                 }else if(parqueadero.getTipoParqueadero().equals("A nivel, piso en concreto, asfalto o gravilla lavada de rio compactada, y con menos de 50 cupos")){
                     if ((parqueadero.getTarifaAutomovil()> 66) || (parqueadero.getTarifaMoto()>46) || (parqueadero.getTarifaBicicleta()> 10)) {
@@ -177,7 +177,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }
                 }else if(parqueadero.getTipoParqueadero().equals("A nivel, pisos en afirmado o césped")){
                     if ((parqueadero.getTarifaAutomovil()> 55) || (parqueadero.getTarifaMoto()>39) || (parqueadero.getTarifaBicicleta()> 10)) {
@@ -187,7 +187,7 @@ public class ParqueaderoDAO {
                                     + "10 COP bicicleta";
                     }else{
                         pjc.edit(parqueadero);
-                        mensaje = "Parqueadero guardado correctamente";
+                        mensaje = "Parqueadero actualizado correctamente";
                     }
                 }
             }catch(Exception e){
