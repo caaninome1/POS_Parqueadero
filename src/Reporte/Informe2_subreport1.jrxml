@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe2_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3c745090-fba2-4113-982a-93ed319ba15d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     PARQUEADERO."NIT" AS PARQUEADERO_NIT,
+     PARQUEADERO."POLIZA" AS PARQUEADERO_POLIZA,
+     PARQUEADERO."RAZON_SOCIAL" AS PARQUEADERO_RAZON_SOCIAL,
+     PARQUEADERO."REGIMEN" AS PARQUEADERO_REGIMEN,
+     PARQUEADERO."TELEFONO" AS PARQUEADERO_TELEFONO
+FROM
+     "ADMINISTRADOR"."PARQUEADERO" PARQUEADERO]]>
+	</queryString>
+	<field name="PARQUEADERO_NIT" class="java.lang.String"/>
+	<field name="PARQUEADERO_POLIZA" class="java.lang.String"/>
+	<field name="PARQUEADERO_RAZON_SOCIAL" class="java.lang.String"/>
+	<field name="PARQUEADERO_REGIMEN" class="java.lang.String"/>
+	<field name="PARQUEADERO_TELEFONO" class="java.lang.String"/>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement x="239" y="40" width="21" height="20" uuid="482bac25-12d6-4ac4-973d-f7b4826c3e82"/>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="289" y="70" width="98" height="20" uuid="e261a0e6-f44c-43cb-88f6-4e60877372ca"/>
+				<textFieldExpression><![CDATA[$F{PARQUEADERO_REGIMEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="54" width="98" height="20" uuid="dac966cf-e5bf-4b9f-8877-683e01fe220e"/>
+				<textFieldExpression><![CDATA[$F{PARQUEADERO_POLIZA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="40" width="98" height="20" uuid="ddf807e6-fe19-4984-8956-45cfaa5e1bfc"/>
+				<textFieldExpression><![CDATA[$F{PARQUEADERO_NIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="40" uuid="9bac8500-ba4d-4b84-bfd9-3b589e8b8027"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PARQUEADERO_RAZON_SOCIAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="86" width="98" height="20" uuid="c5700986-2b4a-4b11-be64-62e03535d24e"/>
+				<textFieldExpression><![CDATA[$F{PARQUEADERO_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="54" width="42" height="20" uuid="e0932298-89f9-4a3f-937d-99c9f9e9bf5a"/>
+				<text><![CDATA[POLIZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="70" width="53" height="20" uuid="ef4c1c5b-9cb6-4742-a0ce-3a1df67b0006"/>
+				<text><![CDATA[RÉGIMEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="86" width="58" height="20" uuid="0c0b5bb3-20e0-44c3-b8ab-b89c7ee0f95e"/>
+				<text><![CDATA[TELÉFONO]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

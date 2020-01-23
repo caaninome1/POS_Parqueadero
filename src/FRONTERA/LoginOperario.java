@@ -6,24 +6,29 @@
 package FRONTERA;
 
 import CONTROLADOR.ControlOperarios;
+import DAOS.DaoOperarios;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import FRONTERA.Operario;
 
 /**
  *
  * @author Carlos
  */
 public class LoginOperario extends javax.swing.JFrame {
-
     /**
      * Creates new form LoginOperario
      */
     private int x;
     private int y;
-    
+    public int codigoOperarioActual=0;
     private ControlOperarios odao = new ControlOperarios();
-    public LoginOperario() {
+    private DaoOperarios daos = new DaoOperarios();  
+    
+
+    
+    public LoginOperario(){
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -101,8 +106,6 @@ public class LoginOperario extends javax.swing.JFrame {
         btnSalir.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         btnSalir.setText("Atrás");
         btnSalir.setBorder(null);
-        btnSalir.setMaximumSize(new java.awt.Dimension(33, 21));
-        btnSalir.setMinimumSize(new java.awt.Dimension(33, 21));
         btnSalir.setPreferredSize(new java.awt.Dimension(20, 20));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -205,7 +208,10 @@ public class LoginOperario extends javax.swing.JFrame {
         }else{
             boolean valor = odao.loginOperario(txtOperario.getText(),txtContrasena.getText());
             if(valor == true){
-                Operario o = new Operario();
+                codigoOperarioActual = odao.buscarOperarioUsuario(txtOperario.getText()).getCodigo();
+                Operario o= new Operario();
+                o.txtCodOp.setText(codigoOperarioActual+"");
+                //JOptionPane.showMessageDialog(null, codigoOperarioActual);
                 o.setVisible(true);
                 this.dispose();
             }else{
@@ -214,6 +220,10 @@ public class LoginOperario extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_btnIniciarSesionOperarioActionPerformed
 
+    
+    
+    
+    
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         FramePrincipal fp = new FramePrincipal();
         fp.setVisible(true);

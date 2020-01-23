@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a438027-bf40-4713-b21d-b87ecb5ccb97">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaEntradaSubBi" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     count(CLIENTES."TIPO_VEHICULO")
+FROM
+     "ADMINISTRADOR"."CLIENTES" CLIENTES
+WHERE
+     TIPO_VEHICULO LIKE 'Bicicleta'
+ AND ENTRADA LIKE '$P!{fechaEntradaSubBi}%']]>
+	</queryString>
+	<field name="1" class="java.lang.Integer"/>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="143" y="0" width="107" height="20" uuid="3c6761b0-7e34-44b9-8747-a7a555e5904e"/>
+				<textFieldExpression><![CDATA[$F{1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="143" height="20" uuid="c784e4aa-a1d6-46b9-9aa0-d32d1a8afb01"/>
+				<text><![CDATA[Cantidad de Bicicletas]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

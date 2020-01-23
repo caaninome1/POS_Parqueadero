@@ -48,7 +48,7 @@ public class Factura extends javax.swing.JFrame implements Printable {
         jLabel3 = new javax.swing.JLabel();
         txtPolizaFactura = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtIdFactura = new javax.swing.JTextField();
+        txtCodigoOperario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         txtMatriculafactura = new javax.swing.JTextField();
@@ -69,12 +69,13 @@ public class Factura extends javax.swing.JFrame implements Printable {
         txtRegimenFactura = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         txtFormadePago = new javax.swing.JTextField();
+        txtIdFactura = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         btnImprimir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(null);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -126,48 +127,48 @@ public class Factura extends javax.swing.JFrame implements Printable {
         txtPolizaFactura.setBorder(null);
         factura.add(txtPolizaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 80, -1));
 
-        jLabel4.setText("FACTURA DE VENTA No.");
-        factura.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 140, -1));
+        jLabel4.setText("Código del Operario");
+        factura.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 140, -1));
 
-        txtIdFactura.setEditable(false);
-        txtIdFactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtIdFactura.setBorder(null);
-        factura.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 80, -1));
+        txtCodigoOperario.setEditable(false);
+        txtCodigoOperario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtCodigoOperario.setBorder(null);
+        factura.add(txtCodigoOperario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 80, -1));
 
         jSeparator1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         factura.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 118, 230, -1));
 
         jLabel5.setText("Matricula:");
-        factura.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        factura.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         txtMatriculafactura.setEditable(false);
         txtMatriculafactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtMatriculafactura.setBorder(null);
-        factura.add(txtMatriculafactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 80, -1));
+        factura.add(txtMatriculafactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 80, -1));
 
         jLabel6.setText("Entrada:");
-        factura.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+        factura.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
         txtEntradafactura.setEditable(false);
         txtEntradafactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtEntradafactura.setBorder(null);
-        factura.add(txtEntradafactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 180, -1));
+        factura.add(txtEntradafactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 180, -1));
 
         jLabel7.setText("Salida:");
-        factura.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        factura.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
         txtSalidaFactura.setEditable(false);
         txtSalidaFactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtSalidaFactura.setBorder(null);
-        factura.add(txtSalidaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 180, -1));
+        factura.add(txtSalidaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 180, -1));
 
         jLabel8.setText("Duración (min):");
-        factura.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        factura.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         txtDuracionFactura.setEditable(false);
         txtDuracionFactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtDuracionFactura.setBorder(null);
-        factura.add(txtDuracionFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 80, -1));
+        factura.add(txtDuracionFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 80, -1));
 
         jLabel9.setText("Base Imponible:");
         factura.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
@@ -232,6 +233,19 @@ public class Factura extends javax.swing.JFrame implements Printable {
         });
         factura.add(txtFormadePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 140, -1));
 
+        txtIdFactura.setEditable(false);
+        txtIdFactura.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtIdFactura.setBorder(null);
+        txtIdFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdFacturaActionPerformed(evt);
+            }
+        });
+        factura.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 80, -1));
+
+        jLabel14.setText("FACTURA DE VENTA No.");
+        factura.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 140, -1));
+
         getContentPane().add(factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 420));
 
         btnImprimir.setText("IMPRIMIR");
@@ -283,6 +297,10 @@ public class Factura extends javax.swing.JFrame implements Printable {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFormadePagoActionPerformed
 
+    private void txtIdFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdFacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdFacturaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,6 +346,7 @@ public class Factura extends javax.swing.JFrame implements Printable {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -340,6 +359,7 @@ public class Factura extends javax.swing.JFrame implements Printable {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel puntosAcumulados;
     public static javax.swing.JTextField txtBaseImponibleFactura;
+    public static javax.swing.JTextField txtCodigoOperario;
     public static javax.swing.JTextField txtDireccionFactura;
     public static javax.swing.JTextField txtDuracionFactura;
     public static javax.swing.JTextField txtEntradafactura;

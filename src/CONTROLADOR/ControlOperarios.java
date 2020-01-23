@@ -25,13 +25,14 @@ public class ControlOperarios {
     
     
     
-    public String insertarOperario(String id, String nombre, String usuario, String contrasena){
+    public String insertarOperario(String id, String nombre, String usuario, String contrasena, int codigo){
         
             try{
             operario.setId(id);
             operario.setNombre(nombre);
             operario.setUsuario(usuario);
             operario.setContrasena(contrasena);
+            operario.setCodigo(codigo);
             if(isValidId(id)==false){
                 mensaje = "ID inválido";
             }else if(verificarLongitudPassword(contrasena)==false){
@@ -54,12 +55,13 @@ public class ControlOperarios {
         return mensaje;
     }
     
-    public String actualizarOperario(String id, String nombre, String usuario, String contrasena){
+    public String actualizarOperario(String id, String nombre, String usuario, String contrasena, int codigo){
         try{
             operario.setId(id);
             operario.setNombre(nombre);
             operario.setUsuario(usuario);
             operario.setContrasena(contrasena);
+            operario.setCodigo(codigo);
             if(isValidId(id)==false){
                 mensaje = "ID inválido";
             }else if(verificarLongitudPassword(contrasena)==false){
@@ -93,17 +95,18 @@ public class ControlOperarios {
     
     public void listarOperarios(JTable tabla, String nombre){
         DefaultTableModel model;
-        String [] titulo = {"ID","NOMBRE","USUARIO","CONTRASENA"};
+        String [] titulo = {"ID","NOMBRE","USUARIO","CONTRASENA","CODIGO"};
         model = new DefaultTableModel(null, titulo);
         
         List<Operarios> datos = buscarOperario(nombre);
         
-        String [] datosOperarios = new String[4];
+        String [] datosOperarios = new String[5];
         for(Operarios o : datos){
             datosOperarios[0] = o.getId()+"";
             datosOperarios[1] = o.getNombre()+"";
             datosOperarios[2] = o.getUsuario()+"";
-            datosOperarios[3] = o.getContrasena()+"";  
+            datosOperarios[3] = o.getContrasena()+""; 
+            datosOperarios[4] = o.getCodigo()+"";
             model.addRow(datosOperarios);
         }
         tabla.setModel(model);
@@ -131,6 +134,24 @@ public class ControlOperarios {
             if(ojc.findOperarios(id)==null){
                 mensaje = "El operario con ID " + id + " No existe";
                 JOptionPane.showMessageDialog(null, mensaje);
+            }
+        }
+        return o;   
+    }
+    
+        public Operarios buscarOperarioUsuario(String usuario){
+        Operarios o = new Operarios();
+        String mensaje = "";
+        EntityManager em = ojc.getEntityManager();
+        try {
+            Query query = em.createQuery("SELECT o FROM Operarios o WHERE o.usuario LIKE :usuario");
+            query.setParameter("usuario", usuario);
+            o = (Operarios) query.getSingleResult();
+            //JOptionPane.showMessageDialog(null, "Búsqueda exitosa"); 
+        } catch (Exception e) {
+            if(ojc.findOperarios(usuario)==null){
+                mensaje = "El operario con ID " + usuario + " No existe";
+                //JOptionPane.showMessageDialog(null, mensaje);
             }
         }
         return o;   

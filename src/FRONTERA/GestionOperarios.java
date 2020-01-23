@@ -67,6 +67,8 @@ public class GestionOperarios extends javax.swing.JFrame {
         btnMinimizar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         lblSuperior = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,8 +81,8 @@ public class GestionOperarios extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("CONTRASEÑA:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        jLabel1.setText("CÓDIGO:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +160,7 @@ public class GestionOperarios extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 120, 30));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 120, 30));
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnGuardar.setText("GUARDAR");
@@ -175,7 +177,7 @@ public class GestionOperarios extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 120, 30));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 120, 30));
 
         btnModificar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnModificar.setText("MODIFICAR");
@@ -192,7 +194,7 @@ public class GestionOperarios extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 130, 30));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 130, 30));
 
         tbOperariosDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,7 +214,7 @@ public class GestionOperarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbOperariosDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 450, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, 470, 180));
 
         btnLimpiar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnLimpiar.setText("LIMPIAR");
@@ -229,7 +231,7 @@ public class GestionOperarios extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 120, 30));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 120, 30));
 
         btnBuscarId.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         btnBuscarId.setText("BUSCAR");
@@ -263,10 +265,10 @@ public class GestionOperarios extends javax.swing.JFrame {
                 btnAtrasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 280, 90, 30));
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 90, 30));
 
         lblicono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/logotipo.png"))); // NOI18N
-        jPanel1.add(lblicono, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, 100, -1));
+        jPanel1.add(lblicono, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 330, 100, -1));
 
         btnMinimizar.setBackground(new java.awt.Color(255, 255, 255));
         btnMinimizar.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -332,10 +334,23 @@ public class GestionOperarios extends javax.swing.JFrame {
         });
         jPanel1.add(lblSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 30));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/fondo4.jpg"))); // NOI18N
-        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 330));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("CONTRASEÑA:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 330));
+        txtCodigo.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 240, 30));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/fondo4.jpg"))); // NOI18N
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 370));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -349,15 +364,16 @@ public class GestionOperarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContrasenaActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if(txtId.getText().equals("")||txtNombre.getText().equals("")||txtUsuario.getText().equals("")||txtContrasena.getText().equals("")){
+        if(txtId.getText().equals("")||txtNombre.getText().equals("")||txtUsuario.getText().equals("")||txtContrasena.getText().equals("")||txtCodigo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
         }else{
             String id = txtId.getText();
             String nombre = txtNombre.getText();
             String usuario = txtUsuario.getText();
             String contrasena = txtContrasena.getText();
+            int codigo = Integer.parseInt(txtCodigo.getText());
             String mensaje = "";
-            mensaje = odao.insertarOperario(id, nombre, usuario, contrasena);
+            mensaje = odao.insertarOperario(id, nombre, usuario, contrasena,codigo);
             JOptionPane.showMessageDialog(null, mensaje);
             if(mensaje!="Guardado correctamente"){
                 mostrarTabla("");
@@ -369,15 +385,16 @@ public class GestionOperarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        if(txtId.getText().equals("")||txtNombre.getText().equals("")||txtUsuario.getText().equals("")||txtContrasena.getText().equals("")){
+        if(txtId.getText().equals("")||txtNombre.getText().equals("")||txtUsuario.getText().equals("")||txtContrasena.getText().equals("")||txtCodigo.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
         }else{
             String id= txtId.getText();
             String nombre = txtNombre.getText();
             String usuario = txtUsuario.getText();
             String contrasena = txtContrasena.getText();
+            int codigo = Integer.parseInt(txtCodigo.getText());
             String mensaje = "";
-            mensaje = odao.actualizarOperario(id, nombre, usuario, contrasena);
+            mensaje = odao.actualizarOperario(id, nombre, usuario, contrasena, codigo);
             JOptionPane.showMessageDialog(null, mensaje);
             if(mensaje!="Actualizado correctamente"){
                 mostrarTabla("");
@@ -407,6 +424,7 @@ public class GestionOperarios extends javax.swing.JFrame {
         txtNombre.setText(tbOperariosDatos.getValueAt(select, 1)+"");
         txtUsuario.setText(tbOperariosDatos.getValueAt(select, 2)+"");
         txtContrasena.setText(tbOperariosDatos.getValueAt(select, 3)+"");
+        txtCodigo.setText(tbOperariosDatos.getValueAt(select, 4)+"");
     }//GEN-LAST:event_tbOperariosDatosMouseClicked
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -427,6 +445,7 @@ public class GestionOperarios extends javax.swing.JFrame {
             txtNombre.setText(operario.getNombre());
             txtUsuario.setText(operario.getUsuario());
             txtContrasena.setText(operario.getContrasena());
+            txtCodigo.setText(operario.getCodigo()+"");
         }
     }//GEN-LAST:event_btnBuscarIdActionPerformed
 
@@ -539,11 +558,16 @@ public class GestionOperarios extends javax.swing.JFrame {
         btnBuscarId.setBackground(new Color(240,240,240));
     }//GEN-LAST:event_btnBuscarIdMouseExited
 
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
     private void limpiar(){
         txtId.setText("");
         txtNombre.setText("");
         txtUsuario.setText("");
         txtContrasena.setText("");
+        txtCodigo.setText("");
     }
     
     private void mostrarTabla(String nombre){
@@ -599,12 +623,14 @@ public class GestionOperarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblSuperior;
     private javax.swing.JLabel lblicono;
     private javax.swing.JTable tbOperariosDatos;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;

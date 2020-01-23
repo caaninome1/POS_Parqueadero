@@ -127,6 +127,11 @@ public class Administrador extends javax.swing.JFrame {
                 btnGenerarInformesMouseExited(evt);
             }
         });
+        btnGenerarInformes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarInformesActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnGenerarInformes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 230, -1));
 
         btnVerEstadisticas.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
@@ -137,6 +142,11 @@ public class Administrador extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVerEstadisticasMouseExited(evt);
+            }
+        });
+        btnVerEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerEstadisticasActionPerformed(evt);
             }
         });
         jPanel1.add(btnVerEstadisticas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 230, -1));
@@ -319,6 +329,18 @@ public class Administrador extends javax.swing.JFrame {
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_lblSuperiorMousePressed
+
+    private void btnGenerarInformesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInformesActionPerformed
+        Informes i = new Informes();
+        i.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGenerarInformesActionPerformed
+
+    private void btnVerEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstadisticasActionPerformed
+        Estadisticas e = new Estadisticas();
+        e.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVerEstadisticasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -74,6 +74,9 @@ public class Clientes implements Serializable {
     
     @Column(name = "VALOR_TOTAL", nullable = true, precision = 52)
     private Double valorTotal;
+    
+    @Column(name = "CODIGO_OPERARIO")
+    private int codigoOperario;
 
     public Clientes() {
     }
@@ -83,7 +86,7 @@ public class Clientes implements Serializable {
     }
 
     public Clientes(BigInteger idTicket, String matricula, String tipoVehiculo,int puntos, String entrada,
-                        String salida, Integer tiempo, Double baseImponible, Double iva, Double valorTotal ) {
+                        String salida, Integer tiempo, Double baseImponible, Double iva, Double valorTotal, int codigoOperario ) {
         this.idTicket = idTicket;
         this.matricula = matricula;
         this.tipoVehiculo = tipoVehiculo;
@@ -95,6 +98,7 @@ public class Clientes implements Serializable {
         this.baseImponible = baseImponible;
         this.iva = iva;
         this.valorTotal = valorTotal;
+        this.codigoOperario = codigoOperario;
         
     }
     
@@ -186,5 +190,13 @@ public class Clientes implements Serializable {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
-    
+
+    public int getCodigoOperario() {
+        return codigoOperario;
+    }
+
+    public void setCodigoOperario(int codigoOperario) {
+        this.codigoOperario = codigoOperario;
+    }
+  
 }

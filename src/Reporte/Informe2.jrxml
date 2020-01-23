@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="578f69fd-8ced-4dff-832c-bbb502501f1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaEntrada" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     CLIENTES."MATRICULA" AS CLIENTES_MATRICULA,
+     CLIENTES."TIPO_VEHICULO" AS CLIENTES_TIPO_VEHICULO,
+     CLIENTES."ENTRADA" AS CLIENTES_ENTRADA,
+     CLIENTES."SALIDA" AS CLIENTES_SALIDA,
+     CLIENTES."CODIGO_OPERARIO" AS CLIENTES_CODIGO_OPERARIO
+FROM
+     "ADMINISTRADOR"."CLIENTES" CLIENTES
+WHERE
+     ENTRADA LIKE '$P!{fechaEntrada}%']]>
+	</queryString>
+	<field name="CLIENTES_MATRICULA" class="java.lang.String"/>
+	<field name="CLIENTES_TIPO_VEHICULO" class="java.lang.String"/>
+	<field name="CLIENTES_ENTRADA" class="java.lang.String"/>
+	<field name="CLIENTES_SALIDA" class="java.lang.String"/>
+	<field name="CLIENTES_CODIGO_OPERARIO" class="java.lang.Integer"/>
+	<title>
+		<band height="250" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="0" width="100" height="20" uuid="e5c3427a-0378-4390-88e3-f18d54895f61"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="133" width="455" height="22" uuid="826ae138-7c0a-49ec-b4c4-b381a0a3bb58"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE VEHICULOS QUE INGRESARON EL DÍA]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="75" uuid="06b5923c-10f8-477e-a64c-14421af89612"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Informe2_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="423" y="133" width="131" height="22" uuid="866c6934-58d2-4968-b7c8-41ad0fcd98c7"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaEntrada}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="162" width="52" height="17" uuid="10f95c8d-039a-4af3-bef9-cf4fa661e497"/>
+				<subreportParameter name="fechaEntradaSubAu">
+					<subreportParameterExpression><![CDATA[$P{fechaEntrada}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="183" width="52" height="16" uuid="b7e9744b-5e1f-4300-ac2d-f29f1c6f5f81"/>
+				<subreportParameter name="fechaEntradaSubMo">
+					<subreportParameterExpression><![CDATA[$P{fechaEntrada}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_Subreport3.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="203" width="52" height="14" uuid="c45f66ea-9873-4bd0-8843-7aa8fadab1ad"/>
+				<subreportParameter name="fechaEntradaSubBi">
+					<subreportParameterExpression><![CDATA[$P{fechaEntrada}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_Subreport4.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="222" width="52" height="14" uuid="57a8a816-74e3-4b50-8dec-9f8642e83660"/>
+				<subreportParameter name="fechaEntradaSubTo">
+					<subreportParameterExpression><![CDATA[$P{fechaEntrada}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_Subreport5.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="e423f222-6565-4ab5-93da-013468e2391e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATRICULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="87aa38ad-a66d-4ab3-a44b-be1ce4b381b8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE VEHICULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="130" height="20" uuid="a70d5b9c-aede-4d48-b240-37ad88b9d516"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA DE ENTRADA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="0" width="134" height="20" uuid="dd0981c4-2b58-4712-bc46-479914087a0e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA DE SALIDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="0" width="68" height="20" uuid="f21f092a-ac5d-4c8e-b420-d35f5676064f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD OP]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="cc37858b-78d7-4018-8615-b32e23f2cf57"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_MATRICULA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="a938df87-6d91-404a-b4e0-f344499c0d06"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_TIPO_VEHICULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="130" height="20" uuid="6a508706-5c46-4a34-82b2-7cfe8354095d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_ENTRADA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="134" height="20" uuid="dc5130f4-3a83-4d1f-8a86-7a60a26f7502"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_SALIDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="68" height="20" uuid="11c516e8-e1dd-44b6-ab6f-1e974c1fe56e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_CODIGO_OPERARIO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="244" y="0" width="50" height="20" uuid="88ec0f2e-8e8c-44f8-aeb5-0b3732653732"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="296" y="0" width="50" height="20" uuid="efde57a8-0f6b-4ddf-9288-21a87f9f8e85"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="20" width="555" height="34" backcolor="#000000" uuid="86cd0fcf-7694-4471-9724-bbe4bf2dd1d7"/>
+			</rectangle>
+			<image>
+				<reportElement x="449" y="20" width="106" height="30" uuid="18c32f2f-3621-492c-89d0-c353eb0f209a"/>
+				<imageExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Downloads\\recorte_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

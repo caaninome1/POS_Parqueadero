@@ -5,11 +5,17 @@ import DAOS.DaoParqueadero;
 import ENTIDAD.Clientes;
 import ENTIDAD.Parqueadero;
 import FRONTERA.Factura;
+import FRONTERA.Informes;
+import FRONTERA.LoginOperario;
 import FRONTERA.Operario;
 import FRONTERA.Ticket;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Instant;
@@ -24,9 +30,23 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -62,6 +82,7 @@ public class ControlClientes {
                 clientes.setBaseImponible(0.0);
                 clientes.setIva(0.0);
                 clientes.setValorTotal(0.0);
+                clientes.setCodigoOperario(0);
 
                 String nitparqueadero = buscarParqueadero().getNit();
                 String telparqueadero = buscarParqueadero().getTelefono();
@@ -229,6 +250,7 @@ public class ControlClientes {
                         clientes.setBaseImponible(bdbi.doubleValue());
                         clientes.setIva(bdiv.doubleValue());
                         clientes.setValorTotal(bdvt.doubleValue());
+                        clientes.setCodigoOperario(Integer.parseInt(Operario.txtCodOp.getText()));
                         
                         cjc.edit(clientes);
                         mensaje = "Salida correcta";      
@@ -251,6 +273,7 @@ public class ControlClientes {
                         factura.txtPolizaFactura.setText(polizaparqueadero);
                         factura.txtRegimenFactura.setText(regimenparqueadero);
                         factura.txtFormadePago.setText(formaPago);
+                        factura.txtCodigoOperario.setText(Operario.txtCodOp.getText());
                         factura.setVisible(true);
                     }
                 } else if(formaPago.equals("Efectivo")) {
@@ -307,6 +330,7 @@ public class ControlClientes {
                     clientes.setBaseImponible(bdbi.doubleValue());
                     clientes.setIva(bdiv.doubleValue());
                     clientes.setValorTotal(bdvt.doubleValue());
+                    clientes.setCodigoOperario(Integer.parseInt(Operario.txtCodOp.getText()));
                     cjc.edit(clientes);
                     mensaje = "Salida correcta";
 
@@ -328,6 +352,7 @@ public class ControlClientes {
                     factura.txtPolizaFactura.setText(polizaparqueadero);
                     factura.txtRegimenFactura.setText(regimenparqueadero);
                     factura.txtFormadePago.setText(formaPago);
+                    factura.txtCodigoOperario.setText(Operario.txtCodOp.getText());
                     factura.setVisible(true);
                 } else if(formaPago.equals("T. Crédito")) {
                     int puntosfidelizacion;
@@ -383,6 +408,7 @@ public class ControlClientes {
                     clientes.setBaseImponible(bdbi.doubleValue());
                     clientes.setIva(bdiv.doubleValue());
                     clientes.setValorTotal(bdvt.doubleValue());
+                    clientes.setCodigoOperario(Integer.parseInt(Operario.txtCodOp.getText()));
                     cjc.edit(clientes);
                     mensaje = "Salida correcta";
 
@@ -404,6 +430,7 @@ public class ControlClientes {
                     factura.txtPolizaFactura.setText(polizaparqueadero);
                     factura.txtRegimenFactura.setText(regimenparqueadero);
                     factura.txtFormadePago.setText(formaPago);
+                    factura.txtCodigoOperario.setText(Operario.txtCodOp.getText());
                     factura.setVisible(true);
                 }else if(formaPago.equals("T. Débito")) {
                     int puntosfidelizacion;
@@ -459,6 +486,7 @@ public class ControlClientes {
                     clientes.setBaseImponible(bdbi.doubleValue());
                     clientes.setIva(bdiv.doubleValue());
                     clientes.setValorTotal(bdvt.doubleValue());
+                    clientes.setCodigoOperario(Integer.parseInt(Operario.txtCodOp.getText()));
                     cjc.edit(clientes);
                     mensaje = "Salida correcta";
 
@@ -480,6 +508,7 @@ public class ControlClientes {
                     factura.txtPolizaFactura.setText(polizaparqueadero);
                     factura.txtRegimenFactura.setText(regimenparqueadero);
                     factura.txtFormadePago.setText(formaPago);
+                    factura.txtCodigoOperario.setText(Operario.txtCodOp.getText());
                     factura.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "Forma de pago inexistente");
@@ -673,6 +702,6 @@ public class ControlClientes {
     public static boolean esMinuscula(String s) {
         // Regresa el resultado de comparar la original con su versión minúscula
         return s.equals(s.toLowerCase());
-    }
-
+    }    
+    
 }

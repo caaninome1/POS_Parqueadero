@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Operarios.findById", query = "SELECT o FROM Operarios o WHERE o.id = :id"),
     @NamedQuery(name = "Operarios.findByNombre", query = "SELECT o FROM Operarios o WHERE o.nombre = :nombre"),
     @NamedQuery(name = "Operarios.findByUsuario", query = "SELECT o FROM Operarios o WHERE o.usuario = :usuario"),
-    @NamedQuery(name = "Operarios.findByContrasena", query = "SELECT o FROM Operarios o WHERE o.contrasena = :contrasena")})
+    @NamedQuery(name = "Operarios.findByContrasena", query = "SELECT o FROM Operarios o WHERE o.contrasena = :contrasena"),
+    @NamedQuery(name = "Operarios.findByCodigo", query = "SELECT o FROM Operarios o WHERE o.codigo = :codigo")})
 public class Operarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,7 +47,11 @@ public class Operarios implements Serializable {
     @Basic(optional = false)
     @Column(name = "CONTRASENA")
     private String contrasena;
+    @Column(name = "CODIGO",unique = true)
+    private int codigo ;
 
+
+    
     public Operarios() {
     }
 
@@ -54,11 +59,12 @@ public class Operarios implements Serializable {
         this.id = id;
     }
 
-    public Operarios(String id, String nombre, String usuario, String contrasena) {
+    public Operarios(String id, String nombre, String usuario, String contrasena, int codigo) {
         this.id = id;
         this.nombre = nombre;
         this.usuario = usuario;
         this.contrasena = contrasena;
+        this.codigo = codigo;
     }
 
     public String getId() {
@@ -92,5 +98,14 @@ public class Operarios implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+    
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     
 }

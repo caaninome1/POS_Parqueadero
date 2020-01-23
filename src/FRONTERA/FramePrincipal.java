@@ -8,7 +8,7 @@ package FRONTERA;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.UIManager;
-import org.apache.derby.impl.sql.compile.SQLParserConstants;
+//import org.apache.derby.impl.sql.compile.SQLParserConstants;
 import javax.swing.ImageIcon;
 import java.awt.MouseInfo;
 import java.awt.Point;

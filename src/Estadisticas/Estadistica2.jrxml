@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6a8b61a-ebf2-45e5-9d4f-bc2c75a3e597">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     CLIENTES."TIPO_VEHICULO" AS CLIENTES_TIPO_VEHICULO,
+SUM(CLIENTES.TIEMPO)AS TIEMPO
+FROM
+     "ADMINISTRADOR"."CLIENTES" CLIENTES
+GROUP BY
+TIPO_VEHICULO]]>
+	</queryString>
+	<field name="CLIENTES_TIPO_VEHICULO" class="java.lang.String"/>
+	<field name="TIEMPO" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="0" width="100" height="20" uuid="ba83c412-d5ed-40f1-8782-7765808430c4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="42" width="555" height="37" uuid="3c6fa622-4f12-4a31-a7c5-2d7d4d12143a"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADÍSTICA DE VEHÍCULOS QUE PERMANECEN MÁS TIEMPO DENTRO DEL PARQUEADERO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="149" y="2" width="100" height="20" uuid="5e99cfa1-e250-4c4a-bbc6-c6d4bc78b625"/>
+				<text><![CDATA[TIPO VEHICULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="2" width="100" height="20" uuid="e3da96bf-86d0-440a-bc37-452fe86a0266"/>
+				<text><![CDATA[TIEMPO (MIN)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="149" y="3" width="100" height="20" uuid="f98f42a5-ecf3-4939-8702-8607de0a7dfc"/>
+				<textFieldExpression><![CDATA[$F{CLIENTES_TIPO_VEHICULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="3" width="100" height="20" uuid="70557a4b-383b-476b-bf15-52e619448109"/>
+				<textFieldExpression><![CDATA[$F{TIEMPO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="296" y="0" width="100" height="20" uuid="5f6f3e39-e3e0-4ed8-a09f-563a9c30fb71"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="298" splitType="Stretch">
+			<barChart>
+				<chart theme="default">
+					<reportElement x="0" y="29" width="555" height="247" uuid="b25229ba-3ebb-47d5-912c-10d61709dfaf"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{CLIENTES_TIPO_VEHICULO}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{CLIENTES_TIPO_VEHICULO}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{TIEMPO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot>
+						<seriesColor seriesOrder="0" color="#2A8D07"/>
+						<seriesColor seriesOrder="1" color="#30297D"/>
+						<seriesColor seriesOrder="2" color="#D72119"/>
+						<seriesColor seriesOrder="3" color="#285C42"/>
+						<seriesColor seriesOrder="4" color="#1E5BFA"/>
+						<seriesColor seriesOrder="5" color="#5CCB3E"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

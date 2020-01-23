@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 import javax.swing.JOptionPane;
 import java.time.Instant;
 import javax.swing.UIManager;
-
+import FRONTERA.Ticket;
+import FRONTERA.LoginOperario;
 /**
  *
  * @author Carlos
@@ -72,6 +73,8 @@ public class Operario extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         lblSuperior = new javax.swing.JLabel();
         lblicono = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCodOp = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -396,6 +399,23 @@ public class Operario extends javax.swing.JFrame {
         lblicono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/logotipo.png"))); // NOI18N
         jPanel1.add(lblicono, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 510, 100, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Código de Operario");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, 20));
+
+        txtCodOp.setEditable(false);
+        txtCodOp.setBackground(new java.awt.Color(27, 32, 36));
+        txtCodOp.setForeground(new java.awt.Color(255, 255, 255));
+        txtCodOp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCodOp.setBorder(null);
+        txtCodOp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodOpActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCodOp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 30, 20));
+
+        lblFondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/fondo4.jpg"))); // NOI18N
         jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
@@ -411,8 +431,6 @@ public class Operario extends javax.swing.JFrame {
         }else{
             String matricula = txtMatricula.getText();
             String tipoVehiculo = cbTipoVehiculo.getSelectedItem().toString();
-            
-            
             mensaje = cdao.ingresoCliente(matricula, tipoVehiculo);
             JOptionPane.showMessageDialog(null, mensaje);
         }
@@ -438,8 +456,7 @@ public class Operario extends javax.swing.JFrame {
         }else{
         BigInteger IdTicket = new BigInteger(txtIdTicket.getText());
         String formaPago = cbformaPago.getSelectedItem().toString();
-        mensaje = cdao.salidaCliente(IdTicket,formaPago ); 
-        
+        mensaje = cdao.salidaCliente(IdTicket,formaPago);
         JOptionPane.showMessageDialog(null, mensaje);
         mostrarTabla();
         limpiar();
@@ -590,6 +607,10 @@ public class Operario extends javax.swing.JFrame {
         btnSalida.setBackground(new Color(153,255,255));
     }//GEN-LAST:event_btnSalidaMouseEntered
 
+    private void txtCodOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodOpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodOpActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -662,6 +683,7 @@ public class Operario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -674,6 +696,7 @@ public class Operario extends javax.swing.JFrame {
     private javax.swing.JLabel lblicono;
     private javax.swing.JTable tbClienteDatos;
     private javax.swing.JTextField txtBaseImponible;
+    public static javax.swing.JTextField txtCodOp;
     private javax.swing.JTextField txtFechaEntrada;
     private javax.swing.JTextField txtFechaSalida;
     private javax.swing.JTextField txtIVA;

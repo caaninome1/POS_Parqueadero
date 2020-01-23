@@ -120,7 +120,7 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         ticket.add(txtRegimenTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 100, -1));
 
         jSeparator1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        ticket.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 128, 230, 10));
+        ticket.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 126, 230, -1));
 
         jLabel1.setText("Poliza");
         ticket.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
@@ -143,6 +143,11 @@ public class Ticket extends javax.swing.JFrame implements Printable {
         txtNoTicket.setToolTipText("");
         txtNoTicket.setBorder(null);
         txtNoTicket.setOpaque(false);
+        txtNoTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoTicketActionPerformed(evt);
+            }
+        });
         ticket.add(txtNoTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 100, -1));
 
         txtMatriculaTicket.setEditable(false);
@@ -186,10 +191,13 @@ public class Ticket extends javax.swing.JFrame implements Printable {
             }
         } catch (PrinterException pex) {
             JOptionPane.showMessageDialog(null, "ERROR DE PROGRAMA","Error\n"+ pex, JOptionPane.INFORMATION_MESSAGE);
-        }
-        
+        }        
         dispose();
     }//GEN-LAST:event_btnGenerarTicketActionPerformed
+
+    private void txtNoTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoTicketActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNoTicketActionPerformed
 
     /**
      * @param args the command line arguments
