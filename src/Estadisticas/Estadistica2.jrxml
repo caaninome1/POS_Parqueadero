@@ -18,19 +18,24 @@ TIPO_VEHICULO]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="185" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy h.mm a">
 				<reportElement x="455" y="0" width="100" height="20" uuid="ba83c412-d5ed-40f1-8782-7765808430c4"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="42" width="555" height="37" uuid="3c6fa622-4f12-4a31-a7c5-2d7d4d12143a"/>
+				<reportElement x="0" y="138" width="555" height="37" uuid="3c6fa622-4f12-4a31-a7c5-2d7d4d12143a"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTADÍSTICA DE VEHÍCULOS QUE PERMANECEN MÁS TIEMPO DENTRO DEL PARQUEADERO]]></text>
 			</staticText>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="ee7c88f7-1928-4e1b-ba72-029fadcbe4a8"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_subreport1.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</title>
 	<pageHeader>
@@ -39,11 +44,13 @@ TIPO_VEHICULO]]>
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="149" y="2" width="100" height="20" uuid="5e99cfa1-e250-4c4a-bbc6-c6d4bc78b625"/>
+				<reportElement x="176" y="2" width="100" height="20" uuid="5e99cfa1-e250-4c4a-bbc6-c6d4bc78b625"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[TIPO VEHICULO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="296" y="2" width="100" height="20" uuid="e3da96bf-86d0-440a-bc37-452fe86a0266"/>
+				<reportElement x="323" y="2" width="100" height="20" uuid="e3da96bf-86d0-440a-bc37-452fe86a0266"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[TIEMPO (MIN)]]></text>
 			</staticText>
 		</band>
@@ -51,28 +58,42 @@ TIPO_VEHICULO]]>
 	<detail>
 		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="149" y="3" width="100" height="20" uuid="f98f42a5-ecf3-4939-8702-8607de0a7dfc"/>
+				<reportElement x="176" y="3" width="100" height="20" uuid="f98f42a5-ecf3-4939-8702-8607de0a7dfc"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{CLIENTES_TIPO_VEHICULO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="296" y="3" width="100" height="20" uuid="70557a4b-383b-476b-bf15-52e619448109"/>
+				<reportElement x="323" y="3" width="100" height="20" uuid="70557a4b-383b-476b-bf15-52e619448109"/>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{TIEMPO}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="27" splitType="Stretch">
+		<band height="56" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="21" width="555" height="34" backcolor="#000000" uuid="496d1966-b753-4af0-b078-e1be3eed28d6"/>
+			</rectangle>
+			<image>
+				<reportElement x="449" y="23" width="106" height="30" uuid="282cea4c-8374-4ec4-834d-ffa6b5d2be5d"/>
+				<imageExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Downloads\\recorte_logo.png"]]></imageExpression>
+			</image>
 			<textField>
-				<reportElement x="296" y="0" width="100" height="20" uuid="5f6f3e39-e3e0-4ed8-a09f-563a9c30fb71"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<reportElement x="226" y="0" width="80" height="20" uuid="a302c77c-6590-48a9-9daf-b63962f55653"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="306" y="0" width="40" height="20" uuid="e2c6ba6c-14d9-4964-afa3-219bed9f5d47"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
 		<band height="298" splitType="Stretch">
 			<barChart>
-				<chart theme="default">
-					<reportElement x="0" y="29" width="555" height="247" uuid="b25229ba-3ebb-47d5-912c-10d61709dfaf"/>
+				<chart>
+					<reportElement x="99" y="20" width="343" height="217" uuid="63ca483e-8785-44aa-964c-904351465ace"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -84,15 +105,8 @@ TIPO_VEHICULO]]>
 						<valueExpression><![CDATA[$F{TIEMPO}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
-				<barPlot isShowLabels="true">
-					<plot>
-						<seriesColor seriesOrder="0" color="#2A8D07"/>
-						<seriesColor seriesOrder="1" color="#30297D"/>
-						<seriesColor seriesOrder="2" color="#D72119"/>
-						<seriesColor seriesOrder="3" color="#285C42"/>
-						<seriesColor seriesOrder="4" color="#1E5BFA"/>
-						<seriesColor seriesOrder="5" color="#5CCB3E"/>
-					</plot>
+				<barPlot>
+					<plot/>
 					<itemLabel/>
 					<categoryAxisFormat>
 						<axisFormat/>

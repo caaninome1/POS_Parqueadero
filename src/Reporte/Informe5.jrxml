@@ -15,7 +15,7 @@
 FROM
      "ADMINISTRADOR"."CLIENTES" CLIENTES
 WHERE
-     ENTRADA LIKE '$P!{fechaEntrada}%'
+     SALIDA LIKE '$P!{fechaEntrada}%'
  AND CODIGO_OPERARIO = $P{cod}]]>
 	</queryString>
 	<field name="1" class="java.lang.Double"/>

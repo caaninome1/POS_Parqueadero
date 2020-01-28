@@ -41,19 +41,19 @@ public class TestAgregarOperario {
     public void insertarOperarios(){
        ControlOperarios odao = new ControlOperarios();
         
-//        System.out.println(odao.insertarOperario("", "", "", ""));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "David", "dscastanedav", "12345"));
-//        System.out.println(odao.insertarOperario("1234567890", "David", "dscastanedav", "12345"));
-//        System.out.println(odao.insertarOperario("0000000000", "Diana", "dbarrerac", "00000"));
-//        System.out.println(odao.insertarOperario("0123456789", "C", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos Pedro Solano Perez Angulo Prieto", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("012345678", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "c", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "el usuario de carlos es: caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "123"));
-//        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "012345678901234567890"));    
+        System.out.println(odao.insertarOperario("", "", "", "",1));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345",1));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345",2));
+        System.out.println(odao.insertarOperario("0123456789", "David", "dscastanedav", "12345",3));
+        System.out.println(odao.insertarOperario("1234567890", "David", "dscastanedav", "12345",9));
+        System.out.println(odao.insertarOperario("0000000000", "Diana", "dbarrerac", "00000",9));
+        System.out.println(odao.insertarOperario("0123456789", "C", "caaninome", "12345",3));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos Pedro Solano Perez Angulo Prieto", "caaninome", "12345",9));
+        System.out.println(odao.insertarOperario("012345678", "Carlos", "caaninome", "12345",3));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "c", "12345",2));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "el usuario de carlos es: caaninome", "12345",2));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "12345",2));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "123",3));
+        System.out.println(odao.insertarOperario("0123456789", "Carlos", "caaninome", "012345678901234567890",3));    
     }
 }

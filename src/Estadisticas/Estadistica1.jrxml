@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="500cb77d-179c-41b2-b431-c4ea5ec2f497">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="24"/>
 	<queryString>
 		<![CDATA[SELECT
      c.TIPO_VEHICULO,sum(case when c.TIPO_VEHICULO = 'Automovil' OR c.TIPO_VEHICULO = 'Motocicleta' OR c.TIPO_VEHICULO = 'Bicicleta' then 1 else 0 end)AS CANTIDAD
@@ -20,24 +20,26 @@ TIPO_VEHICULO]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy h.mm a">
-				<reportElement x="455" y="0" width="100" height="20" uuid="8563d011-70fc-4d00-8a72-0457617e82b2"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
+		<band height="190" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="37" width="555" height="42" uuid="3b1ced7a-5894-431c-a9de-f190b4ff8005"/>
+				<reportElement x="0" y="143" width="555" height="36" uuid="028453a8-08a8-484c-81bd-28027f842748"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTADÍSTICA DE LA CANTIDAD DE VEHÍCULOS QUE INGRESAN AL PARQUEADERO SEGÚN EL TIPO]]></text>
 			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="0" width="100" height="20" uuid="37547878-f7df-4728-b5b8-eae17a839cfe"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="83619e91-2840-4846-99e1-3931b31842c9"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Documents\\NetBeansProjects\\POS_Parqueadero\\src\\Reporte\\Informe2_subreport1.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
@@ -53,7 +55,7 @@ TIPO_VEHICULO]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="26" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
 				<reportElement x="39" y="0" width="100" height="20" uuid="96004bcf-e7ba-4047-ae54-a1e3979927e1"/>
 				<textElement textAlignment="Center"/>
@@ -66,11 +68,31 @@ TIPO_VEHICULO]]>
 			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="55">
+			<rectangle>
+				<reportElement x="0" y="20" width="555" height="34" backcolor="#000000" uuid="4b0d3c75-fac6-4a9e-81ed-a75758f674d1"/>
+			</rectangle>
+			<image>
+				<reportElement x="449" y="20" width="106" height="30" uuid="5363b9ff-5666-4da8-b615-47814c96ef75"/>
+				<imageExpression><![CDATA["C:\\Users\\Carlos.DESKTOP-O8HV065\\Downloads\\recorte_logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="232" y="0" width="80" height="20" uuid="f453e6c3-6e16-4eb6-87c6-9d9f48677b26"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="312" y="0" width="40" height="20" uuid="cdbec192-6ba9-43a2-b3b3-0b80df8ba562"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
 	<summary>
-		<band height="560" splitType="Stretch">
+		<band height="295" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement x="0" y="29" width="555" height="274" uuid="0535f56d-7bb6-403f-b3ec-a0858b62eb78"/>
+					<reportElement x="0" y="34" width="555" height="261" uuid="59cf7817-60a7-421e-ba3e-a263a35eda2f"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>

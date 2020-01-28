@@ -54,21 +54,21 @@ public class InicializacionOperario {
     public void actualizarOperario(){
         ControlOperarios odao = new ControlOperarios();
         
-//        System.out.println(odao.actualizarOperario("", "", "", ""));
-//        System.out.println(odao.actualizarOperario("0123456789", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlos", "caaninome", "12345"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninome", "12345"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "12345"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "1234"));
-//        System.out.println(odao.actualizarOperario("0", "Carlo", "caaninom", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678901234567890", "Carlo", "caaninom", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678", "C", "caaninom", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlos Arturo Peñaranda Sisa de la Aspriella y Romano Mendez Buen día", "caaninom", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "c", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "el usuario provisto a carlos es: caaninomeeeee", "1234"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "1"));
-//        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "123454564654654654654654654")); 
-//        System.out.println("--------------------------");
+        System.out.println(odao.actualizarOperario("", "", "", "",1));
+        System.out.println(odao.actualizarOperario("0123456789", "Carlos", "caaninome", "12345",9));
+        System.out.println(odao.actualizarOperario("012345678", "Carlos", "caaninome", "12345",9));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninome", "12345",9));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "12345",9));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "1234",9));
+        System.out.println(odao.actualizarOperario("0", "Carlo", "caaninom", "1234",9));
+        System.out.println(odao.actualizarOperario("012345678901234567890", "Carlo", "caaninom", "1234",9));
+        System.out.println(odao.actualizarOperario("012345678", "C", "caaninom", "1234",9));
+        System.out.println(odao.actualizarOperario("012345678", "Carlos Arturo Peñaranda Sisa de la Aspriella y Romano Mendez Buen día", "caaninom", "1234",3));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "c", "1234",1));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "el usuario provisto a carlos es: caaninomeeeee", "1234",3));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "1",2));
+        System.out.println(odao.actualizarOperario("012345678", "Carlo", "caaninom", "123454564654654654654654654",2)); 
+        System.out.println("--------------------------");
     }
     
 

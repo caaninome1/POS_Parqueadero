@@ -1,36 +1,42 @@
 package FRONTERA;
 
 import CONTROLADOR.ControlClientes;
+import DAOS.DaoInformes;
 import ENTIDAD.Clientes;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import javax.swing.JOptionPane;
-import java.time.Instant;
-import javax.swing.UIManager;
-import FRONTERA.Ticket;
-import FRONTERA.LoginOperario;
+//import javax.swing.UIManager;
+//import FRONTERA.Ticket;
+//import FRONTERA.LoginOperario;
+import java.text.SimpleDateFormat;
+//import java.time.Instant;
+//import java.util.Date;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+
 /**
  *
  * @author Carlos
  */
 public class Operario extends javax.swing.JFrame {
 
-    private ControlClientes cdao = new ControlClientes();
-    
+    private final ControlClientes cdao = new ControlClientes();
+    private final DaoInformes cjc = new DaoInformes();
     private int x;
     private int y;
-    
+
     public Operario() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("OPERARIO");
         mostrarTabla();
-        Toolkit t= Toolkit.getDefaultToolkit();
+        Toolkit t = Toolkit.getDefaultToolkit();
         setIconImage(t.getImage(getClass().getResource("/FRONTERA/favicon.png")));
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -151,6 +157,11 @@ public class Operario extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnIngresosRegistradosMouseExited(evt);
+            }
+        });
+        btnIngresosRegistrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresosRegistradosActionPerformed(evt);
             }
         });
         jPanel1.add(btnIngresosRegistrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 230, 30));
@@ -426,18 +437,18 @@ public class Operario extends javax.swing.JFrame {
 
     private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
         String mensaje = "";
-        if(txtMatricula.getText().equals("")){
+        if (txtMatricula.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debe ingresar una matrícula");
-        }else{
+        } else {
             String matricula = txtMatricula.getText();
             String tipoVehiculo = cbTipoVehiculo.getSelectedItem().toString();
             mensaje = cdao.ingresoCliente(matricula, tipoVehiculo);
             JOptionPane.showMessageDialog(null, mensaje);
         }
-        if(mensaje == "Ingresado correctamente"){
+        if (mensaje == "Ingresado correctamente") {
             mostrarTabla();
             limpiar();
-        }     
+        }
     }//GEN-LAST:event_btnIngresoActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -445,22 +456,22 @@ public class Operario extends javax.swing.JFrame {
         fp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
-    
+
     private void btnSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidaActionPerformed
         String mensaje = "";
-        if(txtIdTicket.getText().equals("")){
+        if (txtIdTicket.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un ID Ticket!");
-        }else if ((cdao.sacarClientes(new BigInteger(txtIdTicket.getText())))==false){
+        } else if ((cdao.sacarClientes(new BigInteger(txtIdTicket.getText()))) == false) {
             JOptionPane.showMessageDialog(null, "¡El id no existe!");
-            limpiar();          
-        }else{
-        BigInteger IdTicket = new BigInteger(txtIdTicket.getText());
-        String formaPago = cbformaPago.getSelectedItem().toString();
-        mensaje = cdao.salidaCliente(IdTicket,formaPago);
-        JOptionPane.showMessageDialog(null, mensaje);
-        mostrarTabla();
-        limpiar();
-        }           
+            limpiar();
+        } else {
+            BigInteger IdTicket = new BigInteger(txtIdTicket.getText());
+            String formaPago = cbformaPago.getSelectedItem().toString();
+            mensaje = cdao.salidaCliente(IdTicket, formaPago);
+            JOptionPane.showMessageDialog(null, mensaje);
+            mostrarTabla();
+            limpiar();
+        }
     }//GEN-LAST:event_btnSalidaActionPerformed
 
     private void txtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorTotalActionPerformed
@@ -476,7 +487,7 @@ public class Operario extends javax.swing.JFrame {
         //txtEstado.setText(tbClienteDatos.getValueAt(select, 5)+"");
         txtFechaEntrada.setText(tbClienteDatos.getValueAt(select, 4) + "");
         txtFechaSalida.setText(tbClienteDatos.getValueAt(select, 5) + "");
-        txtTiempo.setText(tbClienteDatos.getValueAt(select, 6)+"");
+        txtTiempo.setText(tbClienteDatos.getValueAt(select, 6) + "");
         txtBaseImponible.setText(tbClienteDatos.getValueAt(select, 7) + "");
         txtIVA.setText(tbClienteDatos.getValueAt(select, 8) + "");
         txtValorTotal.setText(tbClienteDatos.getValueAt(select, 9) + "");
@@ -499,35 +510,35 @@ public class Operario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMatriculaKeyReleased
 
     private void btnBuscarIdTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarIdTicketActionPerformed
-        if(txtIdTicket.getText().equals("")){
+        if (txtIdTicket.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "El campo Id Ticket está vacío");
-        }else{
+        } else {
             Clientes c = cdao.buscarClientes(new BigInteger(txtIdTicket.getText()));
             txtMatricula.setText(c.getMatricula());
-            txtPuntos.setText(c.getPuntos()+"");
-            txtTiempo.setText(c.getTiempo()+"");
+            txtPuntos.setText(c.getPuntos() + "");
+            txtTiempo.setText(c.getTiempo() + "");
             txtFechaEntrada.setText(c.getEntrada());
             txtFechaSalida.setText(c.getSalida());
-            txtBaseImponible.setText(c.getBaseImponible()+"");
-            txtIVA.setText(c.getIva()+"");
-            txtValorTotal.setText(c.getValorTotal()+"");
+            txtBaseImponible.setText(c.getBaseImponible() + "");
+            txtIVA.setText(c.getIva() + "");
+            txtValorTotal.setText(c.getValorTotal() + "");
         }
     }//GEN-LAST:event_btnBuscarIdTicketActionPerformed
 
     private void txtIdTicketKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdTicketKeyTyped
         char c = evt.getKeyChar();
-        
-        if(c<'0'|| c>'9'){
+
+        if (c < '0' || c > '9') {
             evt.consume();
         }
     }//GEN-LAST:event_txtIdTicketKeyTyped
 
     private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
-        btnMinimizar.setBackground(new Color(255,204,0));
+        btnMinimizar.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnMinimizarMouseEntered
 
     private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
-        btnMinimizar.setBackground(new Color(240,240,240));
+        btnMinimizar.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
@@ -539,11 +550,11 @@ public class Operario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarPropertyChange
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
-        btnCerrar.setBackground(new Color(255,204,0));
+        btnCerrar.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnCerrarMouseEntered
 
     private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
-        btnCerrar.setBackground(new Color(240,240,240));
+        btnCerrar.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -560,60 +571,70 @@ public class Operario extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSuperiorMousePressed
 
     private void btnIngresosRegistradosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresosRegistradosMouseEntered
-        btnIngresosRegistrados.setBackground(new Color(255,204,0));
+        btnIngresosRegistrados.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnIngresosRegistradosMouseEntered
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
-        btnLimpiar.setBackground(new Color(255,204,0));
+        btnLimpiar.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnLimpiarMouseEntered
 
     private void btnCerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseEntered
-        btnCerrarSesion.setBackground(new Color(255,204,0));
+        btnCerrarSesion.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnCerrarSesionMouseEntered
 
     private void btnBuscarIdTicketMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarIdTicketMouseEntered
-        btnBuscarIdTicket.setBackground(new Color(255,204,0));
+        btnBuscarIdTicket.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnBuscarIdTicketMouseEntered
 
     private void btnIngresosRegistradosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresosRegistradosMouseExited
-        btnIngresosRegistrados.setBackground(new Color(240,240,240));
+        btnIngresosRegistrados.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnIngresosRegistradosMouseExited
 
     private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
-        btnLimpiar.setBackground(new Color(240,240,240));
+        btnLimpiar.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnLimpiarMouseExited
 
     private void btnCerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseExited
-        btnCerrarSesion.setBackground(new Color(240,240,240));
+        btnCerrarSesion.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnCerrarSesionMouseExited
 
     private void btnBuscarIdTicketMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarIdTicketMouseExited
-        btnBuscarIdTicket.setBackground(new Color(240,240,240));
+        btnBuscarIdTicket.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnBuscarIdTicketMouseExited
 
     private void btnIngresoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseExited
-        btnIngreso.setBackground(new Color(153,255,0));
+        btnIngreso.setBackground(new Color(153, 255, 0));
     }//GEN-LAST:event_btnIngresoMouseExited
 
     private void btnSalidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseExited
-        btnSalida.setBackground(new Color(0,204,255));
+        btnSalida.setBackground(new Color(0, 204, 255));
     }//GEN-LAST:event_btnSalidaMouseExited
 
     private void btnIngresoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresoMouseEntered
-        btnIngreso.setBackground(new Color(51,255,51));
+        btnIngreso.setBackground(new Color(51, 255, 51));
     }//GEN-LAST:event_btnIngresoMouseEntered
 
     private void btnSalidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalidaMouseEntered
-        btnSalida.setBackground(new Color(153,255,255));
+        btnSalida.setBackground(new Color(153, 255, 255));
     }//GEN-LAST:event_btnSalidaMouseEntered
 
     private void txtCodOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodOpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodOpActionPerformed
-
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private void btnIngresosRegistradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresosRegistradosActionPerformed
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String salida = sdf.format(timestamp);
+        int cod = Integer.parseInt(txtCodOp.getText());
+        try {
+            cjc.informe6(salida, cod);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al generar informe");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnIngresosRegistradosActionPerformed
 
     /**
-     * @param args the command line arguments
      */
     public void limpiar() {
         txtIdTicket.setText("");
@@ -626,7 +647,7 @@ public class Operario extends javax.swing.JFrame {
         txtIVA.setText("");
         txtValorTotal.setText("");
     }
-    
+
     private void mostrarTabla() {
         cdao.listarClientes(tbClienteDatos);
     }
@@ -658,10 +679,8 @@ public class Operario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Operario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Operario().setVisible(true);
         });
     }
 

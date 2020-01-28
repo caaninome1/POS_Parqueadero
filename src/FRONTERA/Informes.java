@@ -5,51 +5,52 @@
  */
 package FRONTERA;
 
-import CONTROLADOR.ControlClientes;
+//import CONTROLADOR.ControlClientes;
 import DAOS.DaoInformes;
-import ENTIDAD.Clientes;
+//import ENTIDAD.Clientes;
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+//import java.io.IOException;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+//import javax.persistence.EntityManager;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
+//import net.sf.jasperreports.engine.JREmptyDataSource;
+//import net.sf.jasperreports.engine.JRException;
+//import net.sf.jasperreports.engine.JasperCompileManager;
+//import net.sf.jasperreports.engine.JasperFillManager;
+//import net.sf.jasperreports.engine.JasperPrint;
+//import net.sf.jasperreports.engine.JasperReport;
+//import net.sf.jasperreports.engine.util.JRLoader;
+//import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Carlos
  */
 public class Informes extends javax.swing.JFrame {
-    private DaoInformes cjc = new DaoInformes();
+
+    private final DaoInformes cjc = new DaoInformes();
     /**
      * Creates new form Informes
      */
-    
+
     private int x;
     private int y;
-    
+
     public Informes() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("INFORMES");
-        Toolkit t= Toolkit.getDefaultToolkit();
+        Toolkit t = Toolkit.getDefaultToolkit();
         setIconImage(t.getImage(getClass().getResource("/FRONTERA/favicon.png")));
     }
 
@@ -84,6 +85,7 @@ public class Informes extends javax.swing.JFrame {
         txtCodOperario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
         lblSuperior = new javax.swing.JLabel();
 
@@ -251,6 +253,23 @@ public class Informes extends javax.swing.JFrame {
         jLabel9.setText("Ingrese código del Operario");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
 
+        btnAtras.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        btnAtras.setText("Atrás");
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAtrasMouseExited(evt);
+            }
+        });
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 90, 30));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FRONTERA/fondo4.jpg"))); // NOI18N
         lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 430));
@@ -274,47 +293,51 @@ public class Informes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarInforme2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInforme2ActionPerformed
-        Date date = jdc1.getDate();  
-        long d = date.getTime();
-        java.sql.Date f = new java.sql.Date(d);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = df.format(f);
         try {
+            Date date = jdc1.getDate();
+            long d = date.getTime();
+            java.sql.Date f = new java.sql.Date(d);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = df.format(f);
             cjc.informe2(fecha);
         } catch (Exception ex) {
-            Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha válida");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //JOptionPane.showMessageDialog(null, fecha);
-        
+
     }//GEN-LAST:event_btnGenerarInforme2ActionPerformed
 
     private void btnGenerarInforme1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInforme1ActionPerformed
         try {
             cjc.informe1();
         } catch (Exception ex) {
-            Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al generar informe");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnGenerarInforme1ActionPerformed
 
     private void btnGenerarInforme3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInforme3ActionPerformed
-        Date date = jdc2.getDate();  
-        long d = date.getTime();
-        java.sql.Date f = new java.sql.Date(d);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = df.format(f);
         try {
+            Date date = jdc2.getDate();
+            long d = date.getTime();
+            java.sql.Date f = new java.sql.Date(d);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = df.format(f);
             cjc.informe3(fecha);
         } catch (Exception ex) {
-            Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha válida");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_btnGenerarInforme3ActionPerformed
 
     private void btnGenerarInforme4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInforme4ActionPerformed
         try {
             cjc.informe4();
         } catch (Exception ex) {
-            Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al generar informe");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGenerarInforme4ActionPerformed
 
@@ -328,11 +351,11 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_lblSuperiorMousePressed
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
-        btnCerrar.setBackground(new Color(255,204,0));
+        btnCerrar.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnCerrarMouseEntered
 
     private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
-        btnCerrar.setBackground(new Color(240,240,240));
+        btnCerrar.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -340,11 +363,11 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
-        btnMinimizar.setBackground(new Color(255,204,0));
+        btnMinimizar.setBackground(new Color(255, 204, 0));
     }//GEN-LAST:event_btnMinimizarMouseEntered
 
     private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
-        btnMinimizar.setBackground(new Color(240,240,240));
+        btnMinimizar.setBackground(new Color(240, 240, 240));
     }//GEN-LAST:event_btnMinimizarMouseExited
 
     private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
@@ -356,22 +379,43 @@ public class Informes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarPropertyChange
 
     private void btnGenerarInforme5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarInforme5ActionPerformed
-        Date date = jdc5.getDate();  
-        long d = date.getTime();
-        java.sql.Date f = new java.sql.Date(d);
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = df.format(f);
-        int cod = Integer.parseInt(txtCodOperario.getText());
+
         try {
-            cjc.informe5(fecha,cod);
+            Date date = jdc5.getDate();
+            long d = date.getTime();
+            java.sql.Date f = new java.sql.Date(d);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String fecha = df.format(f);
+            int cod = Integer.parseInt(txtCodOperario.getText());
+            cjc.informe5(fecha, cod);
+
+            
         } catch (Exception ex) {
-            Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha o código válidos");
+            //Logger.getLogger(Informes.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        
     }//GEN-LAST:event_btnGenerarInforme5ActionPerformed
 
     private void txtCodOperarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodOperarioActionPerformed
-        
+
     }//GEN-LAST:event_txtCodOperarioActionPerformed
+
+    private void btnAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseEntered
+        btnAtras.setBackground(new Color(255, 204, 0));
+    }//GEN-LAST:event_btnAtrasMouseEntered
+
+    private void btnAtrasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseExited
+        btnAtras.setBackground(new Color(240, 240, 240));
+    }//GEN-LAST:event_btnAtrasMouseExited
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        Administrador a = new Administrador();
+        a.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -401,14 +445,13 @@ public class Informes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Informes().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Informes().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnGenerarInforme1;
     private javax.swing.JButton btnGenerarInforme2;
